@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Полина Павлова — иллюстрация и графический дизайн</title>
+<meta name="description" content="Полина Павлова — иллюстрация, книжные обложки, графический дизайн. Диджитал, акварель, карандаш.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,600&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
+
+<div class="lang-switch">
+  <button class="lang-btn" data-lang="ru">RU</button>
+  <button class="lang-btn" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="sr">SR</button>
+</div>
+
+<div class="reel" id="reel">
+
+  <!-- HERO -->
+  <section class="beat beat-plain">
+    <div class="hero-inner">
+      <h1 class="hero-name reveal-load" data-i18n="heroName">Полина Павлова</h1>
+      <p class="hero-line reveal-load" data-i18n="heroLine">Иллюстрирует книги, рисует людей и собирает афиши — от карандаша до диджитала.</p>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- ============ DIGITAL ============ -->
+  <section class="beat beat-plain">
+    <div class="section-title">
+      <h2><em data-i18n="digitalTitle">Диджитал</em></h2>
+      <p data-i18n="digitalDesc">Афиши и обложки, собранные под конкретное событие.</p>
+    </div>
+  </section>
+
+  <section class="beat beat-solo">
+    <div class="glow-spot" aria-hidden="true"></div>
+    <figure class="frame">
+      <img src="images/digital-01-gnezdo-cover.jpg" width="895" height="1400" alt="Обложка комикса «Гнездо»" data-i18n-alt="gnezdo" loading="lazy">
+    </figure>
+  </section>
+
+  <section class="beat beat-duo">
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/digital-02-kapustnik-bw.jpg" width="905" height="1280" alt="Афиша поэтического капустника, чёрно-белая версия" data-i18n-alt="kapustnikBw" loading="lazy">
+      </figure>
+    </div>
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/digital-03-poster-green.jpg" width="904" height="1280" alt="Афиша поэтического капустника, зелёная версия" data-i18n-alt="kapustnikGreen" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ WATERCOLOR ============ -->
+  <section class="beat beat-plain">
+    <div class="section-title">
+      <h2><em data-i18n="watercolorTitle">Акварель</em></h2>
+      <p data-i18n="watercolorDesc">Книжные обложки и этюды, в которых цвет несёт сюжет.</p>
+    </div>
+  </section>
+
+  <section class="beat beat-duo">
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/watercolor-01-tomatoes.jpg" width="891" height="1280" alt="Акварельный этюд, помидоры" data-i18n-alt="tomatoes" loading="lazy">
+      </figure>
+    </div>
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/watercolor-02-fish.jpg" width="862" height="1240" alt="Акварельный этюд, рыбы" data-i18n-alt="fish" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="beat beat-solo">
+    <div class="glow-spot" aria-hidden="true"></div>
+    <figure class="frame">
+      <img src="images/watercolor-03-still-life.jpg" width="901" height="1280" alt="Акварельный натюрморт" data-i18n-alt="watercolorStillLife" loading="lazy">
+    </figure>
+  </section>
+
+  <section class="beat beat-solo">
+    <div class="glow-spot" aria-hidden="true"></div>
+    <figure class="frame">
+      <img src="images/watercolor-04-exit-poster.jpg" width="639" height="905" alt="Афиша фестиваля Exit" data-i18n-alt="exitPoster" loading="lazy">
+    </figure>
+  </section>
+
+  <section class="beat beat-trio">
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/watercolor-05-heart-cover.jpg" width="875" height="616" alt="Обложка книги «Собачье сердце»" data-i18n-alt="heartCover" loading="lazy">
+      </figure>
+    </div>
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/watercolor-06-metamorphosis-cover.jpg" width="870" height="597" alt="Обложка книги «Превращение»" data-i18n-alt="metamorphosisCover" loading="lazy">
+      </figure>
+    </div>
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/watercolor-07-matilda-cover.jpg" width="917" height="640" alt="Обложка книги «Матильда»" data-i18n-alt="matildaCover" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PENCIL ============ -->
+  <section class="beat beat-plain">
+    <div class="section-title">
+      <h2><em data-i18n="pencilTitle">Карандаш</em></h2>
+      <p data-i18n="pencilDesc">Академический рисунок: фигура, портрет, натюрморт с вниманием к форме.</p>
+    </div>
+  </section>
+
+  <section class="beat beat-solo">
+    <div class="glow-spot" aria-hidden="true"></div>
+    <figure class="frame">
+      <img src="images/pencil-01-still-life.jpg" width="837" height="1176" alt="Карандашный натюрморт" data-i18n-alt="pencilStillLife" loading="lazy">
+    </figure>
+  </section>
+
+  <section class="beat beat-duo">
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/pencil-02-torso-back.jpg" width="839" height="1124" alt="Разрисовка мышц, вид сзади" data-i18n-alt="torsoBack" loading="lazy">
+      </figure>
+    </div>
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/pencil-03-torso-front.jpg" width="863" height="1209" alt="Разрисовка мышц, вид спереди" data-i18n-alt="torsoFront" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="beat beat-duo">
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/pencil-04-figure-standing.jpg" width="854" height="1248" alt="Мужская фигура, стоя" data-i18n-alt="figureStanding" loading="lazy">
+      </figure>
+    </div>
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/pencil-05-figure-seated.jpg" width="622" height="932" alt="Мужчина сидит на стуле" data-i18n-alt="figureSeated" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="beat beat-duo">
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/pencil-06-houdon.jpg" width="763" height="1076" alt="Гипсовая голова, слепок Гудона" data-i18n-alt="houdon" loading="lazy">
+      </figure>
+    </div>
+    <div class="beat-row">
+      <div class="glow-spot" aria-hidden="true"></div>
+      <figure class="frame">
+        <img src="images/pencil-07-apollo.jpg" width="732" height="1031" alt="Гипсовая голова Аполлона" data-i18n-alt="apollo" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- OUTRO -->
+  <section class="beat beat-plain">
+    <p class="outro-name" data-i18n="outroName">Полина Павлова</p>
+    <p class="outro-line" data-i18n="outroLine">Открыта к заказам на иллюстрацию, обложки и афиши.</p>
+    <a class="outro-mail" href="mailto:polina.pavlova.contact@gmail.com">polina.pavlova.contact@gmail.com</a>
+  </section>
+
+</div>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">×</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script src="content.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
