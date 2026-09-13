@@ -11,19 +11,19 @@
 *{ box-sizing: border-box; }
 
 html, body{
-  margin:0;
-  height:100%;
+  margin: 0;
+  height: 100%;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-ui);
   -webkit-font-smoothing: antialiased;
-  overflow: hidden;
+  overflow: hidden; /* single-screen app, not a document to scroll */
 }
 
 img{ max-width:100%; display:block; }
 
 /* ============================================
-   GRAIN — thin texture over the whole page
+   GRAIN
    ============================================ */
 .grain{
   position: fixed;
@@ -37,37 +37,13 @@ img{ max-width:100%; display:block; }
 }
 
 /* ============================================
-   PROGRESS RAIL
-   ============================================ */
-.progress{
-  position: fixed;
-  top: 10%;
-  right: 18px;
-  width: 2px;
-  height: 80%;
-  background: var(--line);
-  z-index: 25;
-}
-.progress span{
-  display:block;
-  width:100%;
-  height:0%;
-  background: var(--ink);
-  opacity:.7;
-  transition: height .15s linear;
-}
-@media (max-width: 640px){
-  .progress{ right: 10px; }
-}
-
-/* ============================================
    LANGUAGE SWITCH
    ============================================ */
 .lang-switch{
   position: fixed;
-  top: 18px;
-  left: 18px;
-  z-index: 25;
+  top: 16px;
+  left: 16px;
+  z-index: 35;
   display: flex;
   gap: 6px;
 }
@@ -83,42 +59,39 @@ img{ max-width:100%; display:block; }
   cursor: pointer;
   transition: color .2s ease, border-color .2s ease;
 }
-.lang-btn.is-active{
-  color: var(--ink);
-  border-color: var(--ink);
-}
+.lang-btn.is-active{ color: var(--ink); border-color: var(--ink); }
 
 /* ============================================
-   REEL — the vertical scroll-snap track.
-   Every direct child is exactly one screen.
+   STAGE — two states occupying the same screen:
+   hero-view (state 1) and carousel-view (state 2).
+   A single scroll/swipe/click gesture crossfades
+   from one to the other, once.
    ============================================ */
-.reel{
-  height: 100svh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scrollbar-width: none;
-}
-.reel::-webkit-scrollbar{ display:none; }
-
-.beat{
+.stage{
   position: relative;
   height: 100svh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  width: 100vw;
   overflow: hidden;
+}
+
+/* ---- state 1: hero ---- */
+.hero-view{
+  position: absolute;
+  inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* ---- plain beats: hero / section titles / outro, no artwork ---- */
-.beat-plain{
-  flex-direction: column;
   text-align: center;
   padding: 24px;
+  transition: opacity .7s ease, transform .7s cubic-bezier(.3,.7,.2,1);
+}
+.hero-view.is-leaving{
+  opacity: 0;
+  transform: translateY(-70px) scale(.92);
+  pointer-events: none;
 }
 
-.hero-inner{ max-width: 720px; }
 .hero-name{
   font-family: var(--font-display);
   font-weight: 700;
@@ -126,6 +99,9 @@ img{ max-width:100%; display:block; }
   line-height: 1.05;
   margin: 0 0 22px;
   letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: rise 1s cubic-bezier(.2,.7,.3,1) forwards;
 }
 .hero-line{
   font-family: var(--font-display);
@@ -136,147 +112,140 @@ img{ max-width:100%; display:block; }
   max-width: 46ch;
   margin: 0 auto;
   line-height: 1.5;
-}
-.reveal-load{
   opacity: 0;
   transform: translateY(18px);
   animation: rise 1s cubic-bezier(.2,.7,.3,1) forwards;
+  animation-delay: .35s;
 }
-.hero-line.reveal-load{ animation-delay: .35s; }
 @keyframes rise{ to{ opacity:1; transform: translateY(0); } }
 
-.scroll-cue{ position:absolute; bottom:34px; left:50%; transform:translateX(-50%); }
-.scroll-cue span{
-  display:block; width:1px; height:46px;
-  background: linear-gradient(var(--muted), transparent);
-  animation: cue 2.2s ease-in-out infinite;
+.scroll-cue{
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px;
+  animation: bob 2s ease-in-out infinite;
 }
-@keyframes cue{
-  0%{ transform: scaleY(0); transform-origin: top; opacity:0; }
-  40%{ transform: scaleY(1); transform-origin: top; opacity:1; }
-  100%{ transform: scaleY(1); transform-origin: bottom; opacity:0; }
+.scroll-cue .chevron{
+  display: block;
+  width: 13px;
+  height: 13px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
 }
-
-.section-title h2{
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 600;
-  font-size: clamp(2.2rem, 7vw, 4rem);
-  margin: 0 0 16px;
-}
-.section-title p{
-  color: var(--muted);
-  font-size: clamp(.95rem, 2vw, 1.1rem);
-  max-width: 40ch;
-  margin: 0 auto;
-  line-height: 1.55;
+@keyframes bob{
+  0%, 100%{ transform: translate(-50%, 0); }
+  50%{ transform: translate(-50%, 9px); }
 }
 
-.outro-name{
+/* ---- state 2: carousel ---- */
+.carousel-view{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(26px);
+  pointer-events: none;
+  transition: opacity .9s ease .15s, transform .9s cubic-bezier(.2,.7,.2,1) .15s;
+}
+.carousel-view.is-active{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.compact-bar{
+  padding: 16px 60px 6px;
+  text-align: center;
+}
+.compact-bar .name{
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
-  margin: 0 0 10px;
+  font-size: 1.05rem;
+  margin: 0;
 }
-.outro-line{ color: var(--muted); margin: 0 0 14px; }
-.outro-mail{
-  color: var(--ink);
-  text-decoration: none;
+.compact-bar .line{
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 4px;
-}
-.outro-mail:hover{ border-color: var(--ink); }
-
-/* ============================================
-   ARTWORK BEATS — the picture is its own set.
-   Each cell (solo section / beat-row) gets a flat
-   background colour sampled from its own image (set
-   inline by script.js), plus a soft blurred glow-spot
-   in that same colour behind the frame.
-   .frame img is never cropped — full image, real
-   proportions, only ever scaled down uniformly.
-   ============================================ */
-.beat-solo,
-.beat-row{
-  transition: background-color .6s ease;
+  font-size: .76rem;
+  color: var(--muted);
+  margin: 2px 0 0;
 }
 
-.glow-spot{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 60vmin;
-  height: 60vmin;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: .55;
-  background: var(--bg);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.frame{
-  position: relative;
-  z-index: 2;
-  margin: 0;
-  max-width: 84vw;
-  max-height: 78svh;
-  opacity: 0;
-  transform: scale(.96);
-  transition: opacity .7s ease, transform .7s ease;
-}
-.beat.is-active .frame{ opacity:1; transform: scale(1); }
-
-.frame img{
-  max-width: 84vw;
-  max-height: 78svh;
-  width: auto;
-  height: auto;
-  border-radius: 16px;
-  box-shadow: 0 30px 70px rgba(0,0,0,.5);
-  cursor: zoom-in;
-}
-
-/* ---- stacked beats: 2 or 3 works, one on top of another,
-   full width, sharing one screen. Each row's own background
-   is a gradient (set by script.js) that already blends into
-   its neighbours at the exact matching colour — no separate
-   seam element, so there is no hard edge to see. ---- */
-.beat-duo,
-.beat-trio{
-  flex-direction: column;
-  padding: 0;
-}
-.beat-duo > .beat-row,
-.beat-trio > .beat-row{
+/* ---- the carousel itself: real 3D via perspective +
+   translateZ (not a fake scale trick), so side cards
+   genuinely recede instead of just shrinking flat. ---- */
+.carousel-stage{
   position: relative;
   flex: 1;
-  width: 100%;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.carousel-track{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-inline: 23vw;
+}
+.carousel-track::-webkit-scrollbar{ display: none; }
+
+.carousel-item{
+  flex: 0 0 54vw;
+  margin-right: -8vw; /* slight overlap — a fanned deck, not a flat ribbon */
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  will-change: transform, opacity, filter;
 }
 
-.beat-duo .frame,
-.beat-duo .frame img{
-  max-width: 88vw;
-  max-height: 44svh;
+.carousel-item img{
+  max-width: 100%;
+  max-height: 58svh;
+  width: auto;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.55);
+  cursor: zoom-in;
+  display: block;
 }
-.beat-trio .frame,
-.beat-trio .frame img{
-  max-width: 74vw;
-  max-height: 29svh;
+
+.caption{
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 7px 16px;
+  font-size: .82rem;
+  color: var(--muted);
+  white-space: nowrap;
+  max-width: 92vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity .45s ease;
+  pointer-events: none;
 }
+.caption.is-visible{ opacity: 1; }
 
 @media (prefers-reduced-motion: reduce){
-  .frame{ transition: opacity .3s ease; transform:none !important; }
-  .reveal-load{ animation: none; opacity:1; transform:none; }
-  .scroll-cue span{ animation:none; opacity:.5; }
+  .hero-name, .hero-line{ animation: none; opacity:1; transform:none; }
+  .scroll-cue{ animation: none; }
+  .hero-view, .carousel-view{ transition: opacity .3s ease; }
 }
 
 /* ============================================

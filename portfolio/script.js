@@ -1,195 +1,58 @@
 (() => {
   'use strict';
 
-  const reel = document.getElementById('reel');
-  const beats = document.querySelectorAll('.beat');
-  const progressFill = document.getElementById('progressFill');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ----------------------------------------------------
-     1. Mark the active beat (fades its artwork in) and
-        drive the progress rail from vertical scroll.
+     1. Hero → carousel reveal. One state machine, one
+        transition, triggered once by the first real
+        scroll/swipe/keyboard/click "next" gesture.
   ---------------------------------------------------- */
-  if ('IntersectionObserver' in window) {
-    const activeObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-active');
-        }
-      });
-    }, { threshold: 0.6 });
+  const heroView = document.getElementById('heroView');
+  const carouselView = document.getElementById('carouselView');
+  const scrollCue = document.getElementById('scrollCue');
 
-    beats.forEach((b) => activeObserver.observe(b));
-  } else {
-    beats.forEach((b) => b.classList.add('is-active'));
+  let revealed = false;
+  function reveal() {
+    if (revealed) return;
+    revealed = true;
+    heroView.classList.add('is-leaving');
+    carouselView.classList.add('is-active');
+    window.removeEventListener('wheel', onWheelIntent);
+    window.removeEventListener('touchstart', onTouchStart);
+    window.removeEventListener('touchmove', onTouchMove);
+    window.removeEventListener('keydown', onKeyIntent);
   }
 
-  function updateProgress() {
-    const max = reel.scrollHeight - reel.clientHeight;
-    const pct = max > 0 ? (reel.scrollTop / max) * 100 : 0;
-    progressFill.style.height = pct + '%';
+  function onWheelIntent(e) {
+    if (e.deltaY > 4) reveal();
   }
-  reel.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
+  let touchStartY = 0;
+  function onTouchStart(e) { touchStartY = e.touches[0].clientY; }
+  function onTouchMove(e) {
+    if (touchStartY - e.touches[0].clientY > 12) reveal();
+  }
+  function onKeyIntent(e) {
+    if (['ArrowDown', 'PageDown', ' '].includes(e.key)) reveal();
+  }
+
+  window.addEventListener('wheel', onWheelIntent, { passive: true });
+  window.addEventListener('touchstart', onTouchStart, { passive: true });
+  window.addEventListener('touchmove', onTouchMove, { passive: true });
+  window.addEventListener('keydown', onKeyIntent);
+  scrollCue.addEventListener('click', reveal);
 
   /* ----------------------------------------------------
-     2. Colour sampling — the artwork's own average colour,
-        used as a flat background plus a glow-spot behind
-        the frame. Near-white paper is excluded from the
-        average (it would just wash the colour out toward
-        grey), and the result gets a saturation boost, since
-        a plain pixel average of a watercolor study — mostly
-        blank paper with a small painted area — reads much
-        paler than the work actually looks.
+     2. Language — swap [data-i18n] text / [data-i18n-alt]
+        alts from content.js, refresh the visible caption.
   ---------------------------------------------------- */
-  const BASE = { r: 23, g: 19, b: 15 }; // matches --bg #17130f
+  let currentLang = 'ru';
+  let refreshCaption = () => {};
 
-  function rgbToHsl(r, g, b) {
-    r /= 255; g /= 255; b /= 255;
-    const max = Math.max(r, g, b), min = Math.min(r, g, b);
-    let h = 0, s = 0;
-    const l = (max + min) / 2;
-    if (max !== min) {
-      const d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        default: h = (r - g) / d + 4;
-      }
-      h /= 6;
-    }
-    return [h, s, l];
-  }
-
-  function hslToRgb(h, s, l) {
-    if (s === 0) {
-      const v = Math.round(l * 255);
-      return [v, v, v];
-    }
-    const hue2rgb = (p, q, t) => {
-      if (t < 0) t += 1;
-      if (t > 1) t -= 1;
-      if (t < 1 / 6) return p + (q - p) * 6 * t;
-      if (t < 1 / 2) return q;
-      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-      return p;
-    };
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    const p = 2 * l - q;
-    return [
-      Math.round(hue2rgb(p, q, h + 1 / 3) * 255),
-      Math.round(hue2rgb(p, q, h) * 255),
-      Math.round(hue2rgb(p, q, h - 1 / 3) * 255),
-    ];
-  }
-
-  function boostSaturation(r, g, b, factor) {
-    const [h, s, l] = rgbToHsl(r, g, b);
-    const [nr, ng, nb] = hslToRgb(h, Math.min(1, s * factor), l);
-    return { r: nr, g: ng, b: nb };
-  }
-
-  function averageColor(img) {
-    try {
-      const canvas = document.createElement('canvas');
-      const w = (canvas.width = 32);
-      const h = (canvas.height = 32);
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, w, h);
-      const data = ctx.getImageData(0, 0, w, h).data;
-
-      let r = 0, g = 0, b = 0, n = 0;
-      let ar = 0, ag = 0, ab = 0; // all-pixel fallback
-      for (let i = 0; i < data.length; i += 4) {
-        const px = data[i], py = data[i + 1], pz = data[i + 2];
-        ar += px; ag += py; ab += pz;
-        const luminance = (px + py + pz) / 3 / 255;
-        if (luminance > 0.92) continue; // skip blank paper / background
-        r += px; g += py; b += pz; n++;
-      }
-      const total = data.length / 4;
-      const base = n > total * 0.05
-        ? { r: r / n, g: g / n, b: b / n }
-        : { r: ar / total, g: ag / total, b: ab / total }; // near-solid-white image
-
-      return boostSaturation(base.r, base.g, base.b, 1.35);
-    } catch (e) {
-      return null; // e.g. canvas blocked when opened via file://; flat --bg stays as fallback
-    }
-  }
-
-  function mix(base, sample, amount) {
-    return Math.round(base + (sample - base) * amount);
-  }
-
-  function tintCell(cell, img, onColor) {
-    const glow = cell.querySelector(':scope > .glow-spot');
-    const apply = () => {
-      const c = averageColor(img);
-      if (!c) return;
-      const mixed = `${mix(BASE.r, c.r, 0.46)}, ${mix(BASE.g, c.g, 0.46)}, ${mix(BASE.b, c.b, 0.46)}`;
-      cell.style.backgroundColor = `rgb(${mixed})`;
-      if (glow) glow.style.backgroundColor = `rgb(${c.r}, ${c.g}, ${c.b})`;
-      if (onColor) onColor(mixed);
-    };
-    if (img.complete) apply();
-    else img.addEventListener('load', apply, { once: true });
-  }
-
-  // solo beats — one cell, nothing to blend with
-  document.querySelectorAll('.beat-solo').forEach((cell) => {
-    const img = cell.querySelector('.frame img');
-    if (img) tintCell(cell, img);
-  });
-
-  /* ----------------------------------------------------
-     3. Stacked beats (duo / trio) — each row's background
-        is a gradient that already fades toward the midpoint
-        colour shared with its neighbour at 0%/100%. Since
-        that midpoint is computed the same way from both
-        sides, two adjacent rows always meet at an identical
-        colour — a true blend, not a separate patched seam.
-  ---------------------------------------------------- */
-  function mixColorStrings(a, b) {
-    const [ar, ag, ab] = a.split(',').map(Number);
-    const [br, bg, bb] = b.split(',').map(Number);
-    return `${Math.round((ar + br) / 2)}, ${Math.round((ag + bg) / 2)}, ${Math.round((ab + bb) / 2)}`;
-  }
-
-  document.querySelectorAll('.beat-duo, .beat-trio').forEach((stack) => {
-    const rows = Array.from(stack.querySelectorAll(':scope > .beat-row'));
-    const fallback = `${BASE.r}, ${BASE.g}, ${BASE.b}`;
-    const rowColor = rows.map(() => fallback);
-
-    function paintRow(i) {
-      const mine = rowColor[i];
-      const top = i > 0 ? mixColorStrings(rowColor[i - 1], mine) : mine;
-      const bottom = i < rowColor.length - 1 ? mixColorStrings(mine, rowColor[i + 1]) : mine;
-      rows[i].style.backgroundImage =
-        `linear-gradient(to bottom, rgb(${top}) 0%, rgb(${mine}) 18%, rgb(${mine}) 82%, rgb(${bottom}) 100%)`;
-    }
-    function repaintAll() { rows.forEach((_, i) => paintRow(i)); }
-    repaintAll();
-
-    rows.forEach((row, i) => {
-      const img = row.querySelector('.frame img');
-      if (!img) return;
-      tintCell(row, img, (mixed) => {
-        rowColor[i] = mixed;
-        row.style.backgroundColor = ''; // let the gradient (background-image) show through
-        repaintAll();
-      });
-    });
-  });
-
-  /* ----------------------------------------------------
-     4. Language — swap all [data-i18n] text and
-        [data-i18n-alt] image alts from content.js,
-        remember the choice.
-  ---------------------------------------------------- */
   function applyLanguage(lang) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[lang]) || (typeof CONTENT !== 'undefined' && CONTENT.ru);
     if (!dict) return;
+    currentLang = lang;
 
     document.documentElement.lang = lang === 'sr' ? 'sr-Latn' : lang;
 
@@ -204,6 +67,8 @@
     document.querySelectorAll('.lang-btn').forEach((b) => {
       b.classList.toggle('is-active', b.dataset.lang === lang);
     });
+
+    refreshCaption();
     try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
   }
 
@@ -211,12 +76,102 @@
     btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
   });
 
+  /* ----------------------------------------------------
+     3. The carousel — one track, all 17 works. Real 3D:
+        each card's distance from centre (in card-slots,
+        not pixels) drives rotateY + translateZ inside a
+        perspective container, so the browser's own 3D
+        projection shrinks and dims side cards — no manual
+        scale hack. Landing on a card shows its caption for
+        about a second, then it fades on its own.
+  ---------------------------------------------------- */
+  const track = document.getElementById('track');
+  const caption = document.getElementById('caption');
+  const items = Array.from(track.querySelectorAll('.carousel-item'));
+
+  function buildCaption(item) {
+    const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
+    const chapter = dict[item.dataset.chapterKey] || '';
+    const alt = (dict.alts && dict.alts[item.dataset.altKey]) || '';
+    return chapter && alt ? `${chapter} — ${alt}` : (chapter || alt);
+  }
+
+  let active = null;
+  let ticking = false;
+  let captionHideTimer = null;
+
+  function showCaptionThenFade() {
+    if (!caption) return;
+    caption.classList.add('is-visible');
+    clearTimeout(captionHideTimer);
+    captionHideTimer = setTimeout(() => caption.classList.remove('is-visible'), 1000);
+  }
+
+  refreshCaption = () => {
+    if (caption && active) caption.textContent = buildCaption(active);
+  };
+
+  function update() {
+    ticking = false;
+    if (!items.length) return;
+
+    const pitch = items[0].getBoundingClientRect().width - (parseFloat(getComputedStyle(items[0]).marginRight) || 0);
+    const rect = track.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+
+    let closest = null, closestAbs = Infinity;
+
+    items.forEach((item) => {
+      const r = item.getBoundingClientRect();
+      const itemCenter = r.left + r.width / 2;
+      const slot = pitch > 0 ? (itemCenter - centerX) / pitch : 0;
+      const abs = Math.min(Math.abs(slot), 3);
+
+      if (!reduceMotion) {
+        const rotate = Math.max(-46, Math.min(46, slot * -46));
+        const z = -abs * 130;
+        const opacity = Math.max(0.32, 1 - abs * 0.28);
+        const blur = Math.min(3, abs * 1.6);
+        item.style.transform = `translateZ(${z}px) rotateY(${rotate}deg)`;
+        item.style.opacity = String(opacity);
+        item.style.filter = blur > 0.05 ? `blur(${blur}px)` : 'none';
+        item.style.zIndex = String(1000 - Math.round(abs * 100));
+      }
+      if (abs < closestAbs) { closestAbs = abs; closest = item; }
+    });
+
+    if (closest !== active) {
+      active = closest;
+      if (caption) caption.textContent = buildCaption(active);
+      showCaptionThenFade();
+    }
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  track.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', update);
+
+  // Desktop convenience: map vertical wheel to horizontal travel
+  // once the carousel is showing (mouse users have no drag axis).
+  track.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      track.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  update();
+  captionHideTimer = setTimeout(() => { if (caption) caption.classList.add('is-visible'); }, 400);
+  setTimeout(showCaptionThenFade, 500);
+
   let savedLang = 'ru';
   try { savedLang = localStorage.getItem('lang') || 'ru'; } catch (e) { /* ignore */ }
   applyLanguage(savedLang);
 
   /* ----------------------------------------------------
-     5. Lightbox — click any sharp frame image to enlarge.
+     4. Lightbox — click any sharp image to enlarge.
   ---------------------------------------------------- */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
@@ -233,7 +188,8 @@
     lightbox.setAttribute('aria-hidden', 'true');
   }
 
-  document.querySelectorAll('.frame img').forEach((img) => {
+  items.forEach((item) => {
+    const img = item.querySelector('img');
     img.addEventListener('click', () => openLightbox(img.src, img.alt));
   });
 
