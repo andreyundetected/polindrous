@@ -326,7 +326,7 @@ script.js
   let refreshCaption = () => {};
 
   function applyLanguage(lang) {
-    const dict = (typeof CONTENT !== 'undefined' && CONTENT[lang]) || (typeof CONTENT !== 'undefined' && CONTENT.ru);
+    const dict = (typeof CONTENT !== 'undefined' && CONTENT[lang]) || (typeof CONTENT !== 'undefined' && CONTENT.en);
     if (!dict) return;
     currentLang = lang;
 
@@ -442,8 +442,8 @@ script.js
   captionHideTimer = setTimeout(() => { if (caption) caption.classList.add('is-visible'); }, 400);
   setTimeout(showCaptionThenFade, 500);
 
-  let savedLang = 'ru';
-  try { savedLang = localStorage.getItem('lang') || 'ru'; } catch (e) { /* ignore */ }
+  let savedLang = 'en';
+  try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
   applyLanguage(savedLang);
 
   /* ----------------------------------------------------
@@ -531,9 +531,9 @@ img{ max-width:100%; display:block; }
   border: 1px solid var(--line);
   color: var(--muted);
   font-family: var(--font-ui);
-  font-size: .7rem;
+  font-size: .78rem;
   letter-spacing: .02em;
-  padding: 4px 9px;
+  padding: 6px 12px;
   border-radius: 20px;
   cursor: pointer;
   transition: color .2s ease, border-color .2s ease;

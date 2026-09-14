@@ -57,9 +57,9 @@ img{ max-width:100%; display:block; }
   border: 1px solid var(--line);
   color: var(--muted);
   font-family: var(--font-ui);
-  font-size: .7rem;
+  font-size: .78rem;
   letter-spacing: .02em;
-  padding: 4px 9px;
+  padding: 6px 12px;
   border-radius: 20px;
   cursor: pointer;
   transition: color .2s ease, border-color .2s ease;
@@ -189,7 +189,7 @@ img{ max-width:100%; display:block; }
 
 /* pushed down clear of the language switch, given real weight */
 .compact-bar{
-  padding: 92px 56px 14px;
+  padding: 104px 56px 14px;
   text-align: center;
 }
 .compact-bar .name{
@@ -220,14 +220,14 @@ img{ max-width:100%; display:block; }
 .carousel-track{
   position: absolute;
   inset: 0;
-  touch-action: pan-y;
+  touch-action: none;
 }
 .carousel-track.is-dragging .carousel-item{ transition: none; }
 
 .carousel-item{
   position: absolute;
   left: 50%;
-  top: 46%;
+  top: 42%;
   transform-origin: center;
   cursor: pointer;
   transition: transform .5s cubic-bezier(.22,.8,.25,1),
@@ -264,7 +264,7 @@ img{ max-width:100%; display:block; }
   color: var(--ink);
   text-align: center;
   white-space: normal;
-  max-width: 78vw;
+  max-width: 86vw;
   text-wrap: balance;
   opacity: 0;
   transition: opacity .5s ease;

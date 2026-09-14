@@ -40,7 +40,7 @@
   let currentLang = 'ru';
 
   function applyLanguage(lang) {
-    const dict = (typeof CONTENT !== 'undefined' && CONTENT[lang]) || (typeof CONTENT !== 'undefined' && CONTENT.ru);
+    const dict = (typeof CONTENT !== 'undefined' && CONTENT[lang]) || (typeof CONTENT !== 'undefined' && CONTENT.en);
     if (!dict) return;
     currentLang = lang;
     document.documentElement.lang = lang === 'sr' ? 'sr-Latn' : lang;
@@ -185,7 +185,7 @@
     const boxWpx = (isLandscape ? LANDSCAPE_HALF : PORTRAIT_HALF) * 2 / 100 * viewportW;
     const finalHpx = boxWpx * (h / w);
 
-    const centerY = stageH * 0.46;
+    const centerY = stageH * 0.42;
     const bottomY = centerY + finalHpx / 2;
     caption.style.top = Math.min(bottomY + 14, stageH - 58) + 'px';
   }
@@ -323,8 +323,8 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
   /* ---- boot ---- */
-  let savedLang = 'ru';
-  try { savedLang = localStorage.getItem('lang') || 'ru'; } catch (e) { /* ignore */ }
+  let savedLang = 'en';
+  try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
   applyLanguage(savedLang);
   render();
 })();
