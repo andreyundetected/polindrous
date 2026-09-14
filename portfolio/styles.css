@@ -6,6 +6,11 @@
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-ui: 'PT Sans', -apple-system, sans-serif;
+
+  --portrait-w: 62vw;
+  --portrait-max-h: 60svh;
+  --landscape-w: 84vw;
+  --landscape-max-h: 46svh;
 }
 
 *{ box-sizing: border-box; }
@@ -17,7 +22,7 @@ html, body{
   color: var(--ink);
   font-family: var(--font-ui);
   -webkit-font-smoothing: antialiased;
-  overflow: hidden; /* single-screen app, not a document to scroll */
+  overflow: hidden; /* single-screen app */
 }
 
 img{ max-width:100%; display:block; }
@@ -62,10 +67,32 @@ img{ max-width:100%; display:block; }
 .lang-btn.is-active{ color: var(--ink); border-color: var(--ink); }
 
 /* ============================================
-   STAGE — two states occupying the same screen:
-   hero-view (state 1) and carousel-view (state 2).
-   A single scroll/swipe/click gesture crossfades
-   from one to the other, once.
+   SOCIAL — email + Instagram, always on screen
+   ============================================ */
+.social-bar{
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 35;
+  display: flex;
+  gap: 16px;
+}
+.social-bar a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: var(--ink);
+  opacity: .82;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.social-bar a:hover{ opacity: 1; transform: translateY(-1px); }
+.social-bar svg{ width: 100%; height: 100%; display: block; }
+
+/* ============================================
+   STAGE — two states, one screen.
    ============================================ */
 .stage{
   position: relative;
@@ -121,7 +148,7 @@ img{ max-width:100%; display:block; }
 
 .scroll-cue{
   position: absolute;
-  bottom: 40px;
+  bottom: 66px;
   left: 50%;
   transform: translateX(-50%);
   background: none;
@@ -160,113 +187,159 @@ img{ max-width:100%; display:block; }
   pointer-events: auto;
 }
 
+/* pushed down clear of the language switch, given real weight */
 .compact-bar{
-  padding: 16px 60px 6px;
+  padding: 92px 56px 14px;
   text-align: center;
 }
 .compact-bar .name{
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   margin: 0;
 }
 .compact-bar .line{
   font-family: var(--font-display);
   font-style: italic;
-  font-size: .76rem;
+  font-size: .92rem;
   color: var(--muted);
-  margin: 2px 0 0;
+  margin: 4px 0 0;
 }
 
-/* ---- the carousel itself: real 3D via perspective +
-   translateZ (not a fake scale trick), so side cards
-   genuinely recede instead of just shrinking flat. ---- */
+/* ---- the carousel: discrete, indexed, circular.
+   Every item is absolutely positioned by script.js —
+   x offset (in vw) and scale come from a chain layout
+   that guarantees a real gap between neighbours,
+   whatever their width. ---- */
 .carousel-stage{
   position: relative;
   flex: 1;
-  perspective: 1400px;
-  perspective-origin: 50% 50%;
+  overflow: hidden;
 }
 
 .carousel-track{
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding-inline: 23vw;
+  touch-action: pan-y;
 }
-.carousel-track::-webkit-scrollbar{ display: none; }
+.carousel-track.is-dragging .carousel-item{ transition: none; }
 
 .carousel-item{
-  flex: 0 0 54vw;
-  margin-right: -8vw; /* slight overlap — a fanned deck, not a flat ribbon */
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  will-change: transform, opacity, filter;
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform-origin: center;
+  cursor: pointer;
+  transition: transform .5s cubic-bezier(.22,.8,.25,1),
+              filter .5s ease,
+              opacity .5s ease;
 }
-
+.carousel-item[data-orientation="portrait"] img{
+  max-width: var(--portrait-w);
+  max-height: var(--portrait-max-h);
+}
+.carousel-item[data-orientation="landscape"] img{
+  max-width: var(--landscape-w);
+  max-height: var(--landscape-max-h);
+}
 .carousel-item img{
-  max-width: 100%;
-  max-height: 58svh;
   width: auto;
   height: auto;
-  border-radius: 16px;
-  box-shadow: 0 30px 70px rgba(0,0,0,.55);
-  cursor: zoom-in;
+  border-radius: 20px;
   display: block;
+  box-shadow: 0 26px 60px rgba(0,0,0,.5);
+  pointer-events: none; /* the .carousel-item handles taps */
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .caption{
   position: absolute;
   left: 50%;
-  bottom: 8px;
   transform: translateX(-50%);
   margin: 0;
-  padding: 7px 16px;
-  font-size: .82rem;
-  color: var(--muted);
-  white-space: nowrap;
-  max-width: 92vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding: 8px 22px;
+  font-size: .98rem;
+  line-height: 1.4;
+  color: var(--ink);
+  text-align: center;
+  white-space: normal;
+  max-width: 78vw;
+  text-wrap: balance;
   opacity: 0;
-  transition: opacity .45s ease;
+  transition: opacity .5s ease;
   pointer-events: none;
+  z-index: 40;
 }
 .caption.is-visible{ opacity: 1; }
 
 @media (prefers-reduced-motion: reduce){
   .hero-name, .hero-line{ animation: none; opacity:1; transform:none; }
   .scroll-cue{ animation: none; }
-  .hero-view, .carousel-view{ transition: opacity .3s ease; }
+  .hero-view, .carousel-view, .carousel-item{ transition: opacity .3s ease; }
 }
 
 /* ============================================
-   LIGHTBOX
+   LIGHTBOX — full-size view, animated open/close
    ============================================ */
 .lightbox{
   position: fixed; inset: 0; z-index: 50;
-  background: rgba(8,7,6,0.96);
+  background: rgba(8,7,6,0);
   display: flex; align-items: center; justify-content: center;
-  padding: 5vh 5vw;
-  opacity: 0; visibility: hidden;
-  transition: opacity .3s ease;
+  padding: 6vh 6vw;
+  visibility: hidden;
+  transition: background .45s ease, visibility 0s linear .45s;
 }
-.lightbox.is-open{ opacity:1; visibility: visible; }
-.lightbox img{ max-width:100%; max-height:90svh; width:auto; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.lightbox.is-open{
+  background: rgba(8,7,6,0.88);
+  visibility: visible;
+  transition: background .45s ease, visibility 0s linear 0s;
+}
+
+.lightbox img{
+  max-width: 100%;
+  max-height: 84svh;
+  width: auto;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  opacity: 0;
+  transform: scale(.86);
+  transition: opacity .45s cubic-bezier(.22,.8,.25,1), transform .45s cubic-bezier(.22,.8,.25,1);
+}
+.lightbox.is-open img{ opacity: 1; transform: scale(1); }
+
+.lightbox-caption{
+  position: absolute;
+  left: 50%;
+  bottom: 6vh;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 8px 18px;
+  font-size: .98rem;
+  color: var(--ink);
+  text-align: center;
+  max-width: 88vw;
+  opacity: 0;
+  transition: opacity .45s ease .1s;
+}
+.lightbox.is-open .lightbox-caption{ opacity: 1; }
+
 .lightbox-close{
-  position: absolute; top: 20px; right: 24px;
-  background: none; border: none; color: var(--ink);
-  font-size: 2.2rem; line-height: 1; cursor: pointer;
-  font-family: var(--font-ui); opacity: .8;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--ink);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  opacity: 0;
+  transition: opacity .3s ease;
+  z-index: 2;
 }
+.lightbox.is-open .lightbox-close{ opacity: .85; }
 .lightbox-close:hover{ opacity: 1; }
 
 a:focus-visible, button:focus-visible{

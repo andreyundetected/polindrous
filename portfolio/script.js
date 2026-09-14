@@ -4,9 +4,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ----------------------------------------------------
-     1. Hero → carousel reveal. One state machine, one
-        transition, triggered once by the first real
-        scroll/swipe/keyboard/click "next" gesture.
+     1. Hero → carousel reveal.
   ---------------------------------------------------- */
   const heroView = document.getElementById('heroView');
   const carouselView = document.getElementById('carouselView');
@@ -22,19 +20,13 @@
     window.removeEventListener('touchstart', onTouchStart);
     window.removeEventListener('touchmove', onTouchMove);
     window.removeEventListener('keydown', onKeyIntent);
+    setTimeout(() => { render(); showCaptionThenFade(); }, 260); // stage is now laid out
   }
-
-  function onWheelIntent(e) {
-    if (e.deltaY > 4) reveal();
-  }
+  function onWheelIntent(e) { if (e.deltaY > 4) reveal(); }
   let touchStartY = 0;
   function onTouchStart(e) { touchStartY = e.touches[0].clientY; }
-  function onTouchMove(e) {
-    if (touchStartY - e.touches[0].clientY > 12) reveal();
-  }
-  function onKeyIntent(e) {
-    if (['ArrowDown', 'PageDown', ' '].includes(e.key)) reveal();
-  }
+  function onTouchMove(e) { if (touchStartY - e.touches[0].clientY > 12) reveal(); }
+  function onKeyIntent(e) { if (['ArrowDown', 'PageDown', ' '].includes(e.key)) reveal(); }
 
   window.addEventListener('wheel', onWheelIntent, { passive: true });
   window.addEventListener('touchstart', onTouchStart, { passive: true });
@@ -43,17 +35,14 @@
   scrollCue.addEventListener('click', reveal);
 
   /* ----------------------------------------------------
-     2. Language — swap [data-i18n] text / [data-i18n-alt]
-        alts from content.js, refresh the visible caption.
+     2. Language.
   ---------------------------------------------------- */
   let currentLang = 'ru';
-  let refreshCaption = () => {};
 
   function applyLanguage(lang) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[lang]) || (typeof CONTENT !== 'undefined' && CONTENT.ru);
     if (!dict) return;
     currentLang = lang;
-
     document.documentElement.lang = lang === 'sr' ? 'sr-Latn' : lang;
 
     document.querySelectorAll('[data-i18n]').forEach((el) => {
@@ -68,26 +57,138 @@
       b.classList.toggle('is-active', b.dataset.lang === lang);
     });
 
-    refreshCaption();
+    if (typeof refreshTexts === 'function') refreshTexts();
     try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
   }
-
   document.querySelectorAll('.lang-btn').forEach((btn) => {
     btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
   });
 
   /* ----------------------------------------------------
-     3. The carousel — one track, all 17 works. Real 3D:
-        each card's distance from centre (in card-slots,
-        not pixels) drives rotateY + translateZ inside a
-        perspective container, so the browser's own 3D
-        projection shrinks and dims side cards — no manual
-        scale hack. Landing on a card shows its caption for
-        about a second, then it fades on its own.
+     3. The carousel.
+     Layout: every item's on-screen x-offset (in vw) and
+     scale come from a "chain" — starting at the active
+     item's own edge, each next item is placed at
+     (previous item's far edge + GAP + this item's own
+     half-width). That guarantees a real gap between any
+     two neighbours no matter how different their widths
+     are (portrait vs. landscape covers), instead of a
+     fixed pixel step that would only work for one case.
   ---------------------------------------------------- */
+  const stage = document.getElementById('carouselStage');
   const track = document.getElementById('track');
   const caption = document.getElementById('caption');
   const items = Array.from(track.querySelectorAll('.carousel-item'));
+  const N = items.length;
+
+  const PORTRAIT_HALF = 31;   // vw — half of --portrait-w
+  const LANDSCAPE_HALF = 42;  // vw — half of --landscape-w
+  const GAP_VW = 4;
+  const MAX_CHAIN = 8;
+
+  function halfWidthVW(i) {
+    return items[i].dataset.orientation === 'landscape' ? LANDSCAPE_HALF : PORTRAIT_HALF;
+  }
+  function scaleForSlot(absD) {
+    if (absD === 0) return 1;
+    if (absD === 1) return 0.62;
+    if (absD === 2) return 0.46;
+    if (absD === 3) return 0.35;
+    return 0.28;
+  }
+  function styleForSlot(absD) {
+    if (absD === 0) return { filter: 'none', opacity: 1, z: 100 };
+    if (absD === 1) return { filter: 'brightness(0.72) blur(1.5px)', opacity: 0.95, z: 90 };
+    if (absD === 2) return { filter: 'brightness(0.55) blur(2.5px)', opacity: 0.85, z: 80 };
+    if (absD === 3) return { filter: 'brightness(0.42) blur(3.5px)', opacity: 0.68, z: 70 };
+    return { filter: 'brightness(0.35) blur(4px)', opacity: 0.4, z: 60 };
+  }
+
+  let activeIndex = 0;
+
+  function circularOffsets(active) {
+    return items.map((_, i) => {
+      let d = i - active;
+      d = ((d % N) + N) % N;
+      if (d > N / 2) d -= N;
+      return d;
+    });
+  }
+
+  function computeLayout(active) {
+    const offsets = circularOffsets(active);
+    const positions = new Array(N);
+    positions[active] = { x: 0, scale: 1, absD: 0 };
+
+    let cursor = halfWidthVW(active);
+    for (let d = 1; d <= MAX_CHAIN; d++) {
+      const idx = offsets.indexOf(d);
+      if (idx === -1) continue;
+      const s = scaleForSlot(d);
+      const hw = halfWidthVW(idx) * s;
+      cursor += GAP_VW;
+      const cx = cursor + hw;
+      cursor = cx + hw;
+      positions[idx] = { x: cx, scale: s, absD: d };
+    }
+
+    let cursorL = -halfWidthVW(active);
+    for (let d = -1; d >= -MAX_CHAIN; d--) {
+      const idx = offsets.indexOf(d);
+      if (idx === -1) continue;
+      const s = scaleForSlot(-d);
+      const hw = halfWidthVW(idx) * s;
+      cursorL -= GAP_VW;
+      const cx = cursorL - hw;
+      cursorL = cx - hw;
+      positions[idx] = { x: cx, scale: s, absD: -d };
+    }
+
+    items.forEach((_, i) => {
+      if (!positions[i]) {
+        const sign = offsets[i] > 0 ? 1 : -1;
+        positions[i] = { x: sign * 160, scale: 0.24, absD: 9 };
+      }
+    });
+    return positions;
+  }
+
+  function applyLayout(positions, extraVW) {
+    items.forEach((item, i) => {
+      const p = positions[i];
+      const x = p.x + (extraVW || 0);
+      const st = styleForSlot(p.absD);
+      item.style.transform = `translate(-50%, -50%) translateX(${x}vw) scale(${p.scale})`;
+      item.style.filter = st.filter;
+      item.style.opacity = String(st.opacity);
+      item.style.zIndex = String(st.z);
+    });
+  }
+
+  function render() {
+    applyLayout(computeLayout(activeIndex));
+    positionCaption();
+  }
+
+  // ---- analytic caption placement: computed from the
+  // active item's known final size, not measured mid-
+  // transition, so it's correct even while animating.
+  function positionCaption() {
+    const item = items[activeIndex];
+    const img = item.querySelector('img');
+    const w = parseFloat(img.getAttribute('width'));
+    const h = parseFloat(img.getAttribute('height'));
+    const stageH = stage.getBoundingClientRect().height;
+    const viewportW = window.innerWidth;
+
+    const isLandscape = item.dataset.orientation === 'landscape';
+    const boxWpx = (isLandscape ? LANDSCAPE_HALF : PORTRAIT_HALF) * 2 / 100 * viewportW;
+    const finalHpx = boxWpx * (h / w);
+
+    const centerY = stageH * 0.46;
+    const bottomY = centerY + finalHpx / 2;
+    caption.style.top = Math.min(bottomY + 14, stageH - 58) + 'px';
+  }
 
   function buildCaption(item) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
@@ -96,90 +197,120 @@
     return chapter && alt ? `${chapter} — ${alt}` : (chapter || alt);
   }
 
-  let active = null;
-  let ticking = false;
   let captionHideTimer = null;
-
   function showCaptionThenFade() {
-    if (!caption) return;
+    caption.textContent = buildCaption(items[activeIndex]);
     caption.classList.add('is-visible');
     clearTimeout(captionHideTimer);
-    captionHideTimer = setTimeout(() => caption.classList.remove('is-visible'), 1000);
+    captionHideTimer = setTimeout(() => caption.classList.remove('is-visible'), 5000);
   }
 
-  refreshCaption = () => {
-    if (caption && active) caption.textContent = buildCaption(active);
-  };
-
-  function update() {
-    ticking = false;
-    if (!items.length) return;
-
-    const pitch = items[0].getBoundingClientRect().width - (parseFloat(getComputedStyle(items[0]).marginRight) || 0);
-    const rect = track.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-
-    let closest = null, closestAbs = Infinity;
-
-    items.forEach((item) => {
-      const r = item.getBoundingClientRect();
-      const itemCenter = r.left + r.width / 2;
-      const slot = pitch > 0 ? (itemCenter - centerX) / pitch : 0;
-      const abs = Math.min(Math.abs(slot), 3);
-
-      if (!reduceMotion) {
-        const rotate = Math.max(-46, Math.min(46, slot * -46));
-        const z = -abs * 130;
-        const opacity = Math.max(0.32, 1 - abs * 0.28);
-        const blur = Math.min(3, abs * 1.6);
-        item.style.transform = `translateZ(${z}px) rotateY(${rotate}deg)`;
-        item.style.opacity = String(opacity);
-        item.style.filter = blur > 0.05 ? `blur(${blur}px)` : 'none';
-        item.style.zIndex = String(1000 - Math.round(abs * 100));
-      }
-      if (abs < closestAbs) { closestAbs = abs; closest = item; }
-    });
-
-    if (closest !== active) {
-      active = closest;
-      if (caption) caption.textContent = buildCaption(active);
+  window.refreshTexts = function refreshTexts() {
+    if (revealed) {
       showCaptionThenFade();
     }
-  }
-
-  function onScroll() {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
-  }
-  track.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', update);
-
-  // Desktop convenience: map vertical wheel to horizontal travel
-  // once the carousel is showing (mouse users have no drag axis).
-  track.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      track.scrollLeft += e.deltaY;
-      e.preventDefault();
+    if (lightbox && lightbox.classList.contains('is-open')) {
+      lightboxCaption.textContent = buildCaption(items[activeIndex]);
     }
-  }, { passive: false });
+  };
 
-  update();
-  captionHideTimer = setTimeout(() => { if (caption) caption.classList.add('is-visible'); }, 400);
-  setTimeout(showCaptionThenFade, 500);
+  function goTo(index) {
+    activeIndex = ((index % N) + N) % N;
+    render();
+    showCaptionThenFade();
+  }
+  function next() { goTo(activeIndex + 1); }
+  function prev() { goTo(activeIndex - 1); }
 
-  let savedLang = 'ru';
-  try { savedLang = localStorage.getItem('lang') || 'ru'; } catch (e) { /* ignore */ }
-  applyLanguage(savedLang);
+  // ---- drag: live 1:1 follow while dragging (transitions
+  // off), release either commits one step, springs back,
+  // or — on a downward swipe — returns to the hero screen.
+  let dragging = false, dragStartX = 0, dragStartY = 0;
+  let dragCurrentVW = 0, dragCurrentPxX = 0, dragCurrentPxY = 0;
+
+  function returnToHero() {
+    if (!revealed) return;
+    revealed = false;
+    heroView.classList.remove('is-leaving');
+    carouselView.classList.remove('is-active');
+    caption.classList.remove('is-visible');
+    clearTimeout(captionHideTimer);
+    window.addEventListener('wheel', onWheelIntent, { passive: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('keydown', onKeyIntent);
+  }
+
+  track.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    dragCurrentVW = 0;
+    dragCurrentPxX = 0;
+    dragCurrentPxY = 0;
+    track.classList.add('is-dragging');
+    track.setPointerCapture(e.pointerId);
+  });
+
+  track.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    dragCurrentPxX = e.clientX - dragStartX;
+    dragCurrentPxY = e.clientY - dragStartY;
+    dragCurrentVW = (dragCurrentPxX / window.innerWidth) * 100;
+    if (Math.abs(dragCurrentPxY) <= Math.abs(dragCurrentPxX)) {
+      applyLayout(computeLayout(activeIndex), dragCurrentVW);
+    }
+  });
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove('is-dragging');
+    const moved = dragCurrentVW;
+    const movedX = dragCurrentPxX;
+    const movedY = dragCurrentPxY;
+    dragCurrentVW = 0;
+    dragCurrentPxX = 0;
+    dragCurrentPxY = 0;
+
+    if (movedY > 70 && Math.abs(movedY) > Math.abs(movedX)) {
+      render();
+      returnToHero();
+      return;
+    }
+    if (moved < -13) next();
+    else if (moved > 13) prev();
+    else render();
+  }
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+
+  // tap vs. drag: a pointerup with barely any movement is a tap
+  track.addEventListener('click', (e) => {
+    const item = e.target.closest('.carousel-item');
+    if (!item) return;
+    const idx = items.indexOf(item);
+    if (idx === activeIndex) openLightbox(idx);
+    else goTo(idx);
+  });
+
+  window.addEventListener('resize', () => { render(); });
 
   /* ----------------------------------------------------
-     4. Lightbox — click any sharp image to enlarge.
+     4. Lightbox — animated open/close, caption stays
+        until closed.
   ---------------------------------------------------- */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
   const lightboxClose = document.getElementById('lightboxClose');
 
-  function openLightbox(src, alt) {
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || '';
+  function openLightbox(idx) {
+    const item = items[idx];
+    const img = item.querySelector('img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = buildCaption(item);
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
   }
@@ -187,13 +318,13 @@
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
   }
-
-  items.forEach((item) => {
-    const img = item.querySelector('img');
-    img.addEventListener('click', () => openLightbox(img.src, img.alt));
-  });
-
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  /* ---- boot ---- */
+  let savedLang = 'ru';
+  try { savedLang = localStorage.getItem('lang') || 'ru'; } catch (e) { /* ignore */ }
+  applyLanguage(savedLang);
+  render();
 })();
