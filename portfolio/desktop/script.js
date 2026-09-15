@@ -80,13 +80,14 @@
 
   let dragging = false, dragStartX = 0, dragStartScroll = 0, dragMoved = 0;
   let lastX = 0, lastT = 0, releaseVelocity = 0;
+  let downTarget = null;
 
   track.addEventListener('pointerdown', (e) => {
-    // Игнорируем клики по ссылкам/кнопкам
     if (e.target.closest('a') || e.target.closest('button')) return;
     
     dragging = true;
     dragMoved = 0;
+    downTarget = e.target;
     velocity = 0;
     if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
     dragStartX = e.clientX;
@@ -94,15 +95,22 @@
     lastX = e.clientX;
     lastT = performance.now();
     releaseVelocity = 0;
-    track.classList.add('is-grabbing');
-    track.setPointerCapture(e.pointerId);
   });
 
   track.addEventListener('pointermove', (e) => {
     if (!dragging) return;
     const dx = e.clientX - dragStartX;
     dragMoved = Math.max(dragMoved, Math.abs(dx));
-    track.scrollLeft = dragStartScroll - dx;
+
+    // Включаем захват pointerCapture только при фактическом драге (> 4px)
+    if (dragMoved > 4 && !track.hasPointerCapture(e.pointerId)) {
+      track.classList.add('is-grabbing');
+      try { track.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+
+    if (dragMoved > 4) {
+      track.scrollLeft = dragStartScroll - dx;
+    }
 
     const now = performance.now();
     const dt = now - lastT;
@@ -111,23 +119,29 @@
     lastT = now;
   });
 
-  function endDrag() {
+  function endDrag(e) {
     if (!dragging) return;
     dragging = false;
     track.classList.remove('is-grabbing');
+    if (e && e.pointerId && track.hasPointerCapture(e.pointerId)) {
+      try { track.releasePointerCapture(e.pointerId); } catch (err) {}
+    }
     if (Math.abs(releaseVelocity) > 0.4) kick(releaseVelocity);
   }
   track.addEventListener('pointerup', endDrag);
   track.addEventListener('pointercancel', endDrag);
 
-  // Увеличен порог dragMoved, чтобы исключить случайные микро-сдвиги при клике
   track.addEventListener('click', (e) => {
-    if (dragMoved > 10) return;
-    const item = e.target.closest('.wall-item');
-    if (item) openLightbox(item);
+    if (dragMoved > 8) return;
+    
+    const target = downTarget || e.target;
+    const item = target.closest('.wall-item') || (e.target !== track ? e.target.closest('.wall-item') : null);
+    
+    if (item) {
+      openLightbox(item);
+    }
   });
 
-  // Отслеживаем колонки (.wall-col), чтобы включать над ними свет
   const cols = Array.from(document.querySelectorAll('.wall-col'));
   if ('IntersectionObserver' in window) {
     const spotObserver = new IntersectionObserver((entries) => {

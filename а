@@ -19,129 +19,6 @@ portfolio/images/watercolor-07-matilda-cover.jpg
 
 
 
-portfolio/index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Полина Павлова — иллюстрация и графический дизайн</title>
-<style>html,body{margin:0;height:100%;background:#17130f;}</style>
-</head>
-<body>
-<script>
-  var target = (window.matchMedia('(min-width: 860px) and (pointer: fine)').matches)
-    ? 'desktop/index.html' : 'mobile/index.html';
-  location.replace(target);
-</script>
-<noscript><meta http-equiv="refresh" content="0; url=mobile/index.html"></noscript>
-</body>
-</html>
-
-
-portfolio/content.js 
-/* All page text, one place per language, so nothing needs
-   translating inline in index.html or script.js. */
-const CONTENT = {
-  ru: {
-    heroName: "Полина Павлова",
-    heroLine: "Иллюстрирует книги, рисует людей и собирает афиши - от карандаша до диджитала.",
-    digitalTitle: "Диджитал",
-    digitalDesc: "Афиши и обложки, собранные под конкретное событие.",
-    watercolorTitle: "Акварель",
-    watercolorDesc: "Книжные обложки и этюды, в которых цвет несёт сюжет.",
-    pencilTitle: "Карандаш",
-    pencilDesc: "Академический рисунок: фигура, портрет, натюрморт с вниманием к форме.",
-    outroName: "Полина Павлова",
-    outroLine: "Открыта к заказам на иллюстрацию, обложки и афиши.",
-    alts: {
-      gnezdo: "Обложка комикса «Гнездо»",
-      kapustnikBw: "Афиша поэтического капустника, чёрно-белая версия",
-      kapustnikGreen: "Афиша поэтического капустника, зелёная версия",
-      tomatoes: "Акварельный этюд, помидоры",
-      fish: "Акварельный этюд, рыбы",
-      watercolorStillLife: "Акварельный натюрморт",
-      exitPoster: "Афиша фестиваля Exit",
-      heartCover: "Обложка книги «Собачье сердце»",
-      metamorphosisCover: "Обложка книги «Превращение»",
-      matildaCover: "Обложка книги «Матильда»",
-      pencilStillLife: "Карандашный натюрморт",
-      torsoBack: "Разрисовка мышц, вид сзади",
-      torsoFront: "Разрисовка мышц, вид спереди",
-      figureStanding: "Мужская фигура, стоя",
-      figureSeated: "Мужчина сидит на стуле",
-      houdon: "Гипсовая голова, слепок Гудона",
-      apollo: "Гипсовая голова Аполлона"
-    }
-  },
-
-  en: {
-    heroName: "Polina Pavlova",
-    heroLine: "Illustrates books, draws people, and designs posters - from pencil to digital.",
-    digitalTitle: "Digital",
-    digitalDesc: "Posters and covers, each built around a specific event.",
-    watercolorTitle: "Watercolor",
-    watercolorDesc: "Book covers and studies where color carries the story.",
-    pencilTitle: "Pencil",
-    pencilDesc: "Academic drawing: figure, portrait, still life, close attention to form.",
-    outroName: "Polina Pavlova",
-    outroLine: "Open to commissions - illustration, covers, posters.",
-    alts: {
-      gnezdo: "Cover of the comic “The Nest”",
-      kapustnikBw: "Poetry night poster, black-and-white version",
-      kapustnikGreen: "Poetry night poster, green version",
-      tomatoes: "Watercolor study, tomatoes",
-      fish: "Watercolor study, fish",
-      watercolorStillLife: "Watercolor still life",
-      exitPoster: "Poster for the Exit festival",
-      heartCover: "Cover of “Heart of a Dog”",
-      metamorphosisCover: "Cover of “The Metamorphosis”",
-      matildaCover: "Cover of “Matilda”",
-      pencilStillLife: "Pencil still life",
-      torsoBack: "Muscle study, back view",
-      torsoFront: "Muscle study, front view",
-      figureStanding: "Male figure, standing",
-      figureSeated: "Man seated on a chair",
-      houdon: "Plaster cast head, Houdon",
-      apollo: "Plaster cast head, Apollo"
-    }
-  },
-
-  sr: {
-    heroName: "Polina Pavlova",
-    heroLine: "Ilustruje knjige, crta ljude i pravi plakate - od olovke do digitala.",
-    digitalTitle: "Digitalno",
-    digitalDesc: "Plakati i korice, napravljeni za konkretan događaj.",
-    watercolorTitle: "Akvarel",
-    watercolorDesc: "Korice knjiga i studije u kojima boja nosi priču.",
-    pencilTitle: "Olovka",
-    pencilDesc: "Akademski crtež: figura, portret, mrtva priroda, pažnja posvećena formi.",
-    outroName: "Polina Pavlova",
-    outroLine: "Otvorena za saradnju - ilustracija, korice, plakati.",
-    alts: {
-      gnezdo: "Korica stripa „Gnezdo“",
-      kapustnikBw: "Plakat za pesničko veče, crno-bela verzija",
-      kapustnikGreen: "Plakat za pesničko veče, zelena verzija",
-      tomatoes: "Akvarel studija, paradajz",
-      fish: "Akvarel studija, ribe",
-      watercolorStillLife: "Akvarel mrtva priroda",
-      exitPoster: "Plakat za festival Exit",
-      heartCover: "Korica knjige „Pseće srce“",
-      metamorphosisCover: "Korica knjige „Preobražaj“",
-      matildaCover: "Korica knjige „Matilda“",
-      pencilStillLife: "Mrtva priroda olovkom",
-      torsoBack: "Studija mišića, pogled s leđa",
-      torsoFront: "Studija mišića, pogled spreda",
-      figureStanding: "Muška figura, stojeći",
-      figureSeated: "Muškarac sedi na stolici",
-      houdon: "Gipsana glava, Houdon",
-      apollo: "Gipsana glava, Apolon"
-    }
-  }
-};
-
-
-
 
 
 portfolio/desktop/index.html
@@ -161,188 +38,246 @@ portfolio/desktop/index.html
 </head>
 <body>
 
-<div class="wall-texture" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
+<!-- ВЕРХНЯЯ ПАНЕЛЬ (ПОТОЛОК) -->
+<header class="header-bar">
+  <div class="lang-switch">
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="sr">SR</button>
+  </div>
 
-<div class="lang-switch">
-  <button class="lang-btn" data-lang="en">EN</button>
-  <button class="lang-btn" data-lang="ru">RU</button>
-  <button class="lang-btn" data-lang="sr">SR</button>
-</div>
+  <div class="identity">
+    <p class="name" data-i18n="heroName">Polina Pavlova</p>
+    <p class="line" data-i18n="heroLine">Illustrates books, draws people, and designs posters — from pencil to digital.</p>
+  </div>
 
-<div class="social-bar">
-  <a href="mailto:polina.pavlova.contact@gmail.com" aria-label="Email" title="polina.pavlova.contact@gmail.com">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-      <rect x="3" y="5" width="18" height="14" rx="2"/>
-      <path d="M3 7l9 6 9-6"/>
-    </svg>
-  </a>
-  <a href="https://instagram.com/polindrous" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="@polindrous">
-    <svg viewBox="0 0 24 24">
-      <defs>
-        <linearGradient id="igGrad" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0%" stop-color="#f58529"/>
-          <stop offset="35%" stop-color="#dd2a7b"/>
-          <stop offset="70%" stop-color="#8134af"/>
-          <stop offset="100%" stop-color="#515bd4"/>
-        </linearGradient>
-      </defs>
-      <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igGrad)"/>
-      <rect x="6.5" y="6.5" width="11" height="11" rx="3.2" fill="none" stroke="#fff" stroke-width="1.6"/>
-      <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6"/>
-      <circle cx="17" cy="7" r="1.1" fill="#fff"/>
-    </svg>
-  </a>
-</div>
-
-<header class="identity">
-  <p class="name" data-i18n="heroName">Polina Pavlova</p>
-  <p class="line" data-i18n="heroLine">Illustrates books, draws people, and designs posters — from pencil to digital.</p>
+  <div class="social-bar">
+    <a href="mailto:polina.pavlova.contact@gmail.com" aria-label="Email" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3 7l9 6 9-6"/>
+      </svg>
+    </a>
+    <a href="https://instagram.com/polindrous" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="igGrad" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stop-color="#f58529"/>
+            <stop offset="35%" stop-color="#dd2a7b"/>
+            <stop offset="70%" stop-color="#8134af"/>
+            <stop offset="100%" stop-color="#515bd4"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igGrad)"/>
+        <rect x="6.5" y="6.5" width="11" height="11" rx="3.2" fill="none" stroke="#fff" stroke-width="1.6"/>
+        <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6"/>
+        <circle cx="17" cy="7" r="1.1" fill="#fff"/>
+      </svg>
+    </a>
+    <a href="https://t.me/polindrous" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 2L11 13" />
+        <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+      </svg>
+    </a>
+  </div>
 </header>
 
+<!-- ГАЛЕРЕЙНАЯ СТЕНА -->
 <div class="wall-track" id="wallTrack">
+  <div class="wall-surface">
+    <div class="wall-baseboard"></div>
 
-  <!-- ============ DIGITAL ============ -->
-  <figure class="wall-item" style="--h:42vh; --dy:-10px; --mr:64px" data-chapter-key="digitalTitle" data-alt-key="gnezdo">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/digital-01-gnezdo-cover.jpg" width="895" height="1400" alt="Cover of the comic The Nest" data-i18n-alt="gnezdo" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <!-- DIGITAL -->
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-10px" data-chapter-key="digitalTitle" data-alt-key="gnezdo">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:40vh" src="../images/digital-01-gnezdo-cover.jpg" width="895" height="1400" alt="" data-i18n-alt="gnezdo" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:42vh; --dy:18px; --mr:22px" data-chapter-key="digitalTitle" data-alt-key="kapustnikBw">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/digital-02-kapustnik-bw.jpg" width="905" height="1280" alt="Poetry night poster, black-and-white version" data-i18n-alt="kapustnikBw" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:10px" data-chapter-key="digitalTitle" data-alt-key="kapustnikBw">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/digital-02-kapustnik-bw.jpg" width="905" height="1280" alt="" data-i18n-alt="kapustnikBw" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:42vh; --dy:-22px; --mr:64px" data-chapter-key="digitalTitle" data-alt-key="kapustnikGreen">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/digital-03-poster-green.jpg" width="904" height="1280" alt="Poetry night poster, green version" data-i18n-alt="kapustnikGreen" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-15px" data-chapter-key="digitalTitle" data-alt-key="kapustnikGreen">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/digital-03-poster-green.jpg" width="904" height="1280" alt="" data-i18n-alt="kapustnikGreen" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <!-- ============ WATERCOLOR ============ -->
-  <figure class="wall-item" style="--h:21vh; --dy:30px; --mr:16px" data-chapter-key="watercolorTitle" data-alt-key="tomatoes">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/watercolor-01-tomatoes.jpg" width="891" height="1280" alt="Watercolor study, tomatoes" data-i18n-alt="tomatoes" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <!-- WATERCOLOR STACK 1 -->
+    <div class="wall-col stack">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="watercolorTitle" data-alt-key="tomatoes">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:20vh" src="../images/watercolor-01-tomatoes.jpg" width="891" height="1280" alt="" data-i18n-alt="tomatoes" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+      <figure class="wall-item" data-chapter-key="watercolorTitle" data-alt-key="fish">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:20vh" src="../images/watercolor-02-fish.jpg" width="862" height="1240" alt="" data-i18n-alt="fish" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:21vh; --dy:-14px; --mr:16px" data-chapter-key="watercolorTitle" data-alt-key="fish">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/watercolor-02-fish.jpg" width="862" height="1240" alt="Watercolor study, fish" data-i18n-alt="fish" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <!-- WATERCOLOR 3 (Still life) -->
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:5px" data-chapter-key="watercolorTitle" data-alt-key="watercolorStillLife">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:36vh" src="../images/watercolor-03-still-life.jpg" width="901" height="1280" alt="" data-i18n-alt="watercolorStillLife" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:21vh; --dy:12px; --mr:64px" data-chapter-key="watercolorTitle" data-alt-key="watercolorStillLife">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/watercolor-03-still-life.jpg" width="901" height="1280" alt="Watercolor still life" data-i18n-alt="watercolorStillLife" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <!-- WATERCOLOR 4 (Exit Poster) -->
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-15px" data-chapter-key="watercolorTitle" data-alt-key="exitPoster">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/watercolor-04-exit-poster.jpg" width="639" height="905" alt="" data-i18n-alt="exitPoster" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:42vh; --dy:-18px; --mr:64px" data-chapter-key="watercolorTitle" data-alt-key="exitPoster">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/watercolor-04-exit-poster.jpg" width="639" height="905" alt="Poster for the Exit festival" data-i18n-alt="exitPoster" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <!-- WATERCOLOR STACK 2 -->
+    <div class="wall-col stack">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="watercolorTitle" data-alt-key="heartCover">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:20vh" src="../images/watercolor-05-heart-cover.jpg" width="875" height="616" alt="" data-i18n-alt="heartCover" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+      <figure class="wall-item" data-chapter-key="watercolorTitle" data-alt-key="metamorphosisCover">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:20vh" src="../images/watercolor-06-metamorphosis-cover.jpg" width="870" height="597" alt="" data-i18n-alt="metamorphosisCover" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:30vh; --dy:22px; --mr:20px" data-chapter-key="watercolorTitle" data-alt-key="heartCover">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/watercolor-05-heart-cover.jpg" width="875" height="616" alt="Cover of Heart of a Dog" data-i18n-alt="heartCover" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:10px" data-chapter-key="watercolorTitle" data-alt-key="matildaCover">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:30vh" src="../images/watercolor-07-matilda-cover.jpg" width="917" height="640" alt="" data-i18n-alt="matildaCover" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:30vh; --dy:-8px; --mr:20px" data-chapter-key="watercolorTitle" data-alt-key="metamorphosisCover">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/watercolor-06-metamorphosis-cover.jpg" width="870" height="597" alt="Cover of The Metamorphosis" data-i18n-alt="metamorphosisCover" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <!-- PENCIL - HANGING ITEMS -->
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-10px" data-chapter-key="pencilTitle" data-alt-key="pencilStillLife">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/pencil-01-still-life.jpg" width="837" height="1176" alt="" data-i18n-alt="pencilStillLife" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:30vh; --dy:16px; --mr:64px" data-chapter-key="watercolorTitle" data-alt-key="matildaCover">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/watercolor-07-matilda-cover.jpg" width="917" height="640" alt="Cover of Matilda" data-i18n-alt="matildaCover" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:10px" data-chapter-key="pencilTitle" data-alt-key="torsoBack">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/pencil-02-torso-back.jpg" width="839" height="1124" alt="" data-i18n-alt="torsoBack" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+    
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-5px" data-chapter-key="pencilTitle" data-alt-key="torsoFront">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/pencil-03-torso-front.jpg" width="863" height="1209" alt="" data-i18n-alt="torsoFront" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <!-- ============ PENCIL ============ -->
-  <figure class="wall-item" style="--h:59vh; --dy:-30px; --mr:64px" data-chapter-key="pencilTitle" data-alt-key="pencilStillLife">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/pencil-01-still-life.jpg" width="837" height="1176" alt="Pencil still life" data-i18n-alt="pencilStillLife" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <!-- PENCIL - STACKED HEADS -->
+    <div class="wall-col stack" style="margin-inline: 40px">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="houdon">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:22vh" src="../images/pencil-06-houdon.jpg" width="763" height="1076" alt="" data-i18n-alt="houdon" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="apollo">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:22vh" src="../images/pencil-07-apollo.jpg" width="732" height="1031" alt="" data-i18n-alt="apollo" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:59vh; --dy:10px; --mr:26px" data-chapter-key="pencilTitle" data-alt-key="torsoBack">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/pencil-02-torso-back.jpg" width="839" height="1124" alt="Muscle study, back view" data-i18n-alt="torsoBack" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <!-- PENCIL - FIGURES -->
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-12px" data-chapter-key="pencilTitle" data-alt-key="figureStanding">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:44vh" src="../images/pencil-04-figure-standing.jpg" width="854" height="1248" alt="" data-i18n-alt="figureStanding" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:59vh; --dy:-20px; --mr:64px" data-chapter-key="pencilTitle" data-alt-key="torsoFront">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/pencil-03-torso-front.jpg" width="863" height="1209" alt="Muscle study, front view" data-i18n-alt="torsoFront" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
+    <div class="wall-col" style="padding-right: 10vw;">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:8px" data-chapter-key="pencilTitle" data-alt-key="figureSeated">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:44vh" src="../images/pencil-05-figure-seated.jpg" width="622" height="932" alt="" data-i18n-alt="figureSeated" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
 
-  <figure class="wall-item" style="--h:60vh; --dy:6px; --mr:26px" data-chapter-key="pencilTitle" data-alt-key="figureStanding">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/pencil-04-figure-standing.jpg" width="854" height="1248" alt="Male figure, standing" data-i18n-alt="figureStanding" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
-
-  <figure class="wall-item" style="--h:60vh; --dy:-12px; --mr:64px" data-chapter-key="pencilTitle" data-alt-key="figureSeated">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/pencil-05-figure-seated.jpg" width="622" height="932" alt="Man seated on a chair" data-i18n-alt="figureSeated" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
-
-  <figure class="wall-item" style="--h:42vh; --dy:24px; --mr:24px" data-chapter-key="pencilTitle" data-alt-key="houdon">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/pencil-06-houdon.jpg" width="763" height="1076" alt="Plaster cast head, Houdon" data-i18n-alt="houdon" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
-
-  <figure class="wall-item" style="--h:42vh; --dy:-6px; --mr:0px" data-chapter-key="pencilTitle" data-alt-key="apollo">
-    <span class="spot" aria-hidden="true"></span>
-    <div class="frame"><div class="mat">
-      <img src="../images/pencil-07-apollo.jpg" width="732" height="1031" alt="Plaster cast head, Apollo" data-i18n-alt="apollo" loading="lazy">
-    </div></div>
-    <figcaption class="plaque"></figcaption>
-  </figure>
-
+  </div>
 </div>
 
+<!-- НИЖНЯЯ ПАНЕЛЬ (ПОЛ) -->
+<footer class="footer-bar"></footer>
+
+<!-- Лайтбокс -->
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
   <img id="lightboxImg" src="" alt="">
@@ -353,6 +288,7 @@ portfolio/desktop/index.html
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
@@ -440,10 +376,14 @@ portfolio/desktop/script.js
 
   let dragging = false, dragStartX = 0, dragStartScroll = 0, dragMoved = 0;
   let lastX = 0, lastT = 0, releaseVelocity = 0;
+  let downTarget = null;
 
   track.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('a') || e.target.closest('button')) return;
+    
     dragging = true;
     dragMoved = 0;
+    downTarget = e.target;
     velocity = 0;
     if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
     dragStartX = e.clientX;
@@ -451,15 +391,22 @@ portfolio/desktop/script.js
     lastX = e.clientX;
     lastT = performance.now();
     releaseVelocity = 0;
-    track.classList.add('is-grabbing');
-    track.setPointerCapture(e.pointerId);
   });
 
   track.addEventListener('pointermove', (e) => {
     if (!dragging) return;
     const dx = e.clientX - dragStartX;
     dragMoved = Math.max(dragMoved, Math.abs(dx));
-    track.scrollLeft = dragStartScroll - dx;
+
+    // Включаем захват pointerCapture только при фактическом драге (> 4px)
+    if (dragMoved > 4 && !track.hasPointerCapture(e.pointerId)) {
+      track.classList.add('is-grabbing');
+      try { track.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+
+    if (dragMoved > 4) {
+      track.scrollLeft = dragStartScroll - dx;
+    }
 
     const now = performance.now();
     const dt = now - lastT;
@@ -468,31 +415,40 @@ portfolio/desktop/script.js
     lastT = now;
   });
 
-  function endDrag() {
+  function endDrag(e) {
     if (!dragging) return;
     dragging = false;
     track.classList.remove('is-grabbing');
+    if (e && e.pointerId && track.hasPointerCapture(e.pointerId)) {
+      try { track.releasePointerCapture(e.pointerId); } catch (err) {}
+    }
     if (Math.abs(releaseVelocity) > 0.4) kick(releaseVelocity);
   }
   track.addEventListener('pointerup', endDrag);
   track.addEventListener('pointercancel', endDrag);
 
   track.addEventListener('click', (e) => {
-    if (dragMoved > 6) return;
-    const item = e.target.closest('.wall-item');
-    if (item) openLightbox(item);
+    if (dragMoved > 8) return;
+    
+    const target = downTarget || e.target;
+    const item = target.closest('.wall-item') || (e.target !== track ? e.target.closest('.wall-item') : null);
+    
+    if (item) {
+      openLightbox(item);
+    }
   });
 
+  const cols = Array.from(document.querySelectorAll('.wall-col'));
   if ('IntersectionObserver' in window) {
     const spotObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         entry.target.classList.toggle('in-view', entry.isIntersecting);
       });
-    }, { root: track, threshold: 0.55 });
+    }, { root: track, threshold: 0.15 });
 
-    items.forEach((item) => spotObserver.observe(item));
+    cols.forEach((col) => spotObserver.observe(col));
   } else {
-    items.forEach((item) => item.classList.add('in-view'));
+    cols.forEach((col) => col.classList.add('in-view'));
   }
 
   const lightbox = document.getElementById('lightbox');
@@ -502,10 +458,10 @@ portfolio/desktop/script.js
   let currentLightboxItem = null;
 
   function openLightbox(item) {
-    currentLightboxItem = item;
     const img = item.querySelector('img');
+    if (!img) return;
+    currentLightboxItem = item;
     lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
     lightboxCaption.textContent = buildCaption(item);
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
@@ -513,22 +469,31 @@ portfolio/desktop/script.js
   function closeLightbox() {
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
+    setTimeout(() => { if (!lightbox.classList.contains('is-open')) lightboxImg.src = ''; }, 400);
+    currentLightboxItem = null;
   }
   lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
 
-  let savedLang = 'en';
-  try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
-  applyLanguage(savedLang);
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved && (saved === 'ru' || saved === 'en' || saved === 'sr')) applyLanguage(saved);
+    else applyLanguage(navigator.language.startsWith('ru') ? 'ru' : (navigator.language.startsWith('sr') ? 'sr' : 'en'));
+  } catch (e) { applyLanguage('en'); }
+
 })();
+
 
 
 
 
 portfolio/desktop/styles.css
 :root{
-  --bg: #14100c;
   --ink: #efe6d6;
   --muted: rgba(239,230,214,0.6);
   --line: rgba(239,230,214,0.16);
@@ -546,123 +511,79 @@ portfolio/desktop/styles.css
 html, body{
   margin: 0;
   height: 100%;
-  background: var(--bg);
+  background: #0a0a0a;
   color: var(--ink);
   font-family: var(--font-ui);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
+  user-select: none;
 }
 
 img{ max-width: none; display: block; }
 
-.wall-texture{
+/* --- HEADER (ПОТОЛОК) --- */
+.header-bar {
   position: fixed;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(115deg, rgba(255,255,255,.02) 0px, rgba(255,255,255,.02) 1px, transparent 1px, transparent 5px),
-    repeating-linear-gradient(25deg, rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 1px, transparent 1px, transparent 7px);
-  pointer-events: none;
-  z-index: 0;
-}
-.grain{
-  position: fixed;
-  inset: 0;
-  background-image: url('../images/grain.png');
-  background-size: 160px 160px;
-  opacity: 0.045;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  z-index: 20;
-}
-body::before{
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 70% at 50% 46%, transparent 45%, rgba(0,0,0,.4) 100%);
-  pointer-events: none;
-  z-index: 4;
-}
-
-.lang-switch{
-  position: fixed;
-  top: 22px;
-  left: 26px;
-  z-index: 35;
-  display: flex;
-  gap: 8px;
-}
-.lang-btn{
-  background: none;
-  border: 1px solid var(--line);
-  color: var(--muted);
-  font-family: var(--font-ui);
-  font-size: .8rem;
-  letter-spacing: .02em;
-  padding: 6px 13px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: color .2s ease, border-color .2s ease;
-}
-.lang-btn.is-active{ color: var(--ink); border-color: var(--ink); }
-.lang-btn:hover{ color: var(--ink); }
-
-.social-bar{
-  position: fixed;
-  left: 50%;
-  bottom: 22px;
-  transform: translateX(-50%);
-  z-index: 35;
-  display: flex;
-  gap: 18px;
-}
-.social-bar a{
+  top: 0; left: 0; right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, #16110d, #0d0907);
+  border-bottom: 2px solid #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+  z-index: 40;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  color: var(--ink);
-  opacity: .78;
-  transition: opacity .2s ease, transform .2s ease;
+  justify-content: space-between;
+  padding: 0 40px;
 }
-.social-bar a:hover{ opacity: 1; transform: translateY(-1px); }
-.social-bar svg{ width: 100%; height: 100%; display: block; }
-
-.identity{
-  position: fixed;
-  top: 34px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  z-index: 5;
+.header-bar::after {
+  content: ''; position: absolute; inset: 0;
+  background: url('../images/grain.png');
+  opacity: 0.15;
   pointer-events: none;
 }
-.identity .name{
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.7rem;
-  margin: 0;
-  letter-spacing: -0.01em;
+
+.lang-switch { position: relative; display: flex; gap: 8px; z-index: 2; }
+.lang-btn {
+  background: none; border: 1px solid var(--line); color: var(--muted);
+  font-family: var(--font-ui); font-size: .8rem; padding: 6px 13px;
+  border-radius: 20px; cursor: pointer; transition: color .2s, border-color .2s;
 }
-.identity .line{
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--muted);
-  margin: 8px 0 0;
+.lang-btn.is-active, .lang-btn:hover { color: var(--ink); border-color: var(--ink); }
+
+.identity { position: relative; z-index: 2; text-align: center; pointer-events: none; }
+.identity .name { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; margin: 0; }
+.identity .line { font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--muted); margin: 6px 0 0; }
+
+.social-bar { position: relative; display: flex; gap: 18px; z-index: 2; }
+.social-bar a {
+  display: flex; align-items: center; justify-content: center; width: 24px; height: 24px;
+  color: var(--ink); opacity: .78; transition: opacity .2s, transform .2s;
+}
+.social-bar a:hover { opacity: 1; transform: translateY(-1px); }
+.social-bar svg { width: 100%; height: 100%; display: block; }
+
+/* --- FOOTER (ПОЛ) --- */
+.footer-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 30px;
+  background: linear-gradient(to top, #16110d, #0d0907);
+  border-top: 2px solid #000;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.9);
+  z-index: 40;
+}
+.footer-bar::after {
+  content: ''; position: absolute; inset: 0;
+  background: url('../images/grain.png');
+  opacity: 0.15;
+  pointer-events: none;
 }
 
-.wall-track{
+/* --- СТЕНА И ГАЛЕРЕЯ --- */
+.wall-track {
   position: fixed;
-  left: 0;
-  right: 0;
-  top: 120px;
-  bottom: 90px;
-  display: flex;
-  align-items: center;
-  padding-inline: 12vw;
-  overflow-x: auto;
-  overflow-y: hidden;
+  top: 90px; bottom: 30px; left: 0; right: 0;
+  overflow-x: auto; overflow-y: hidden;
   scrollbar-width: none;
   cursor: grab;
   z-index: 2;
@@ -670,161 +591,201 @@ body::before{
 .wall-track::-webkit-scrollbar{ display: none; }
 .wall-track.is-grabbing{ cursor: grabbing; }
 
-.wall-item{
+/* Фиксированный шум поверх всей стены (без швов тайлинга) */
+.wall-track::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('../images/grain.png');
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wall-surface {
   position: relative;
+  height: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: stretch;
+  padding: 0 5vw;
+  background: linear-gradient(to bottom, #1f1f1f 0%, #141414 50%, #0d0d0d 100%);
+  box-shadow: inset 0 25px 40px -15px rgba(0,0,0,0.8);
+}
+.wall-baseboard {
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 16px;
+  background: #080808;
+  border-top: 2px solid #222;
+  z-index: 0;
+}
+
+.wall-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   flex: 0 0 auto;
-  margin: 0 var(--mr, 40px) 0 0;
+  width: max-content;
+  min-width: max-content;
+  padding: 0 clamp(60px, 5vw, 110px);
+}
+.wall-col:nth-child(2n) { padding-inline: clamp(75px, 6vw, 130px); }
+.wall-col:nth-child(3n) { padding-inline: clamp(50px, 4vw, 95px); }
+.wall-col.stack { gap: clamp(20px, 3vh, 35px); }
+
+/* --- ОСВЕЩЕНИЕ --- */
+.lamp {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 44px; height: 12px;
+  background: #111;
+  border-radius: 0 0 4px 4px;
+  border: 1px solid #333;
+  border-top: none;
+  z-index: 10;
+}
+.lamp::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 8px; right: 8px; height: 3px;
+  background: #ffe3b3; border-radius: 50%;
+  box-shadow: 0 1px 8px #ffe3b3;
+}
+.spot {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(255, 235, 195, 0.12) 0%, rgba(255, 235, 195, 0.03) 60%, transparent 100%);
+  pointer-events: none;
+  opacity: 1;
+  z-index: 1;
+}
+
+/* --- КАРТИНЫ И РАМКИ --- */
+.wall-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   transform: translateY(var(--dy, 0px));
+  margin: 0;
+  padding-top: 55px;
+  cursor: pointer;
 }
 
-.spot{
-  position: absolute;
-  top: -52px;
-  left: 50%;
-  width: 78%;
-  height: 80px;
-  transform: translateX(-50%) scaleY(.4);
-  transform-origin: top center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(255,232,185,.4) 0%, transparent 72%);
-  filter: blur(7px);
-  opacity: 0;
-  transition: opacity .7s ease, transform .7s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-.wall-item.in-view .spot{
-  opacity: 1;
-  transform: translateX(-50%) scaleY(1);
-}
-
-.frame{
+.frame {
   position: relative;
   z-index: 2;
-  border-radius: 3px;
-  padding: 15px;
-  background:
-    linear-gradient(150deg, var(--wood-hi) 0%, var(--wood-lo) 55%, #0c0805 100%);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.08),
-    inset 0 2px 3px rgba(255,255,255,.16),
-    inset 0 -5px 10px rgba(0,0,0,.65),
-    0 30px 60px rgba(0,0,0,.6);
-}
-
-.mat{
-  display: block;
-  overflow: hidden;
-  border-radius: 1px;
-  border: 3px solid var(--gold);
-  background: var(--mat);
-  padding: clamp(8px, 2.2vh, 22px);
-  box-shadow: inset 0 0 12px rgba(0,0,0,.12);
-}
-
-.wall-item img{
-  display: block;
-  border-radius: 1px;
-  height: var(--h);
-  width: auto;
-  max-width: 56vw;
-  max-height: var(--h);
+  border-radius: 2px;
+  padding: 12px;
+  background: linear-gradient(150deg, var(--wood-hi) 0%, var(--wood-lo) 55%, #0c0805 100%);
+  box-shadow: 
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    inset 0 2px 3px rgba(255,255,255,.12),
+    0 25px 50px rgba(0,0,0,.7);
   cursor: zoom-in;
-  user-select: none;
+}
+.mat {
+  display: block; overflow: hidden;
+  border: 2px solid var(--gold);
+  background: var(--mat);
+  padding: clamp(8px, 1.8vh, 18px);
+  box-shadow: inset 0 0 10px rgba(0,0,0,.15);
+}
+.wall-item img {
+  display: block;
+  height: var(--h); width: auto; max-width: 50vw;
   -webkit-user-drag: none;
 }
 
-.plaque{
-  position: relative;
-  z-index: 2;
+/* --- ПОДВЕСЫ (ГВОЗДИ И ВЕРЕВОЧКИ) --- */
+.hardware {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  z-index: 0;
+}
+/* Обычный гвоздь */
+.hardware.nail {
+  top: -20px;
+  width: 7px; height: 7px;
+  background: #111; border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(255,255,255,0.2), inset 0 2px 3px rgba(0,0,0,1);
+}
+/* Веревочка (шнур натягивается от краев рамы к гвоздю) */
+.hardware.string {
+  top: 0;
+  width: 50%;
+  height: 55px;
+}
+.hardware.string::before { /* Гвоздь */
+  content: ''; position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 7px; height: 7px;
+  background: #111; border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(255,255,255,0.2), inset 0 2px 3px rgba(0,0,0,1);
+}
+.hardware.string::after { /* Сам шнур (нарисован градиентом как треугольник без низа) */
+  content: ''; position: absolute;
+  top: 4px; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(to bottom right, transparent 48%, rgba(255,255,255,0.25) 49%, rgba(255,255,255,0.25) 51%, transparent 52%) left / 50.5% 100% no-repeat,
+    linear-gradient(to top right, transparent 48%, rgba(255,255,255,0.25) 49%, rgba(255,255,255,0.25) 51%, transparent 52%) right / 50.5% 100% no-repeat;
+}
+
+/* --- ТАБЛИЧКИ --- */
+.plaque {
+  position: relative; z-index: 2;
   margin: 16px 0 0;
-  font-family: var(--font-ui);
-  font-size: .78rem;
-  color: var(--muted);
-  text-align: center;
-  max-width: 22vw;
-  line-height: 1.4;
+  font-size: .78rem; color: var(--muted);
+  text-align: center; max-width: 20vw; line-height: 1.4;
 }
 
-@media (prefers-reduced-motion: reduce){
-  .wall-item, .spot{ transition: none; }
-}
-
+/* --- LIGHTBOX --- */
 .lightbox{
   position: fixed; inset: 0; z-index: 50;
-  background: rgba(8,7,6,0);
-  display: flex; align-items: center; justify-content: center;
-  padding: 6vh 6vw;
-  visibility: hidden;
-  transition: background .45s ease, visibility 0s linear .45s;
+  background: rgba(0,0,0,0);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 5vh 5vw; visibility: hidden; opacity: 0;
+  transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s linear;
 }
 .lightbox.is-open{
-  background: rgba(8,7,6,0.9);
-  visibility: visible;
-  transition: background .45s ease, visibility 0s linear 0s;
+  background: rgba(0,0,0,0.88);
+  visibility: visible; opacity: 1;
 }
-
 .lightbox img{
-  max-width: 82vw;
-  max-height: 82svh;
-  width: auto;
-  height: auto;
-  box-shadow: 0 20px 60px rgba(0,0,0,.5);
-  opacity: 0;
-  transform: scale(.9);
-  transition: opacity .4s cubic-bezier(.22,.8,.25,1), transform .4s cubic-bezier(.22,.8,.25,1);
+  max-width: 88vw; max-height: 80vh;
+  object-fit: contain;
+  box-shadow: 0 25px 70px rgba(0,0,0,.8);
+  opacity: 0; transform: scale(.92);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .lightbox.is-open img{ opacity: 1; transform: scale(1); }
-
 .lightbox-caption{
-  position: absolute;
-  left: 50%;
-  bottom: 7vh;
-  transform: translateX(-50%);
-  margin: 0;
-  padding: 8px 20px;
-  font-size: 1rem;
-  color: var(--ink);
-  text-align: center;
-  max-width: 70vw;
-  opacity: 0;
-  transition: opacity .4s ease .1s;
+  position: absolute; left: 50%; bottom: 3.5vh; transform: translateX(-50%);
+  font-size: 1.05rem; color: var(--ink); text-align: center; opacity: 0;
+  letter-spacing: 0.02em; pointer-events: none;
+  transition: opacity 0.35s ease 0.1s;
 }
 .lightbox.is-open .lightbox-caption{ opacity: 1; }
-
 .lightbox-close{
-  position: absolute;
-  top: 26px;
-  right: 30px;
-  background: none;
-  border: none;
-  color: var(--ink);
-  font-size: 2.1rem;
-  line-height: 1;
-  cursor: pointer;
-  font-family: var(--font-ui);
-  opacity: 0;
-  transition: opacity .3s ease;
+  position: absolute; top: 28px; right: 36px;
+  background: none; border: none; color: var(--ink);
+  font-size: 2.5rem; line-height: 1; cursor: pointer; opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s ease;
 }
-.lightbox.is-open .lightbox-close{ opacity: .85; }
-.lightbox-close:hover{ opacity: 1; }
-
-a:focus-visible, button:focus-visible{
-  outline: 1px solid var(--ink);
-  outline-offset: 3px;
-}
+.lightbox.is-open .lightbox-close{ opacity: .75; transform: scale(1); }
+.lightbox-close:hover{ opacity: 1; color: #fff; transform: scale(1.1); }
 
 
 
-стало лучше, но,
-1. подсветка выглядит странно. она начинается в рандомном месте прямой линией и таким полукругом идет. можно попоробовать под картину, но тогда тень снизу картины будет ставить странно, а я бы хотел. ставить в самом верхну сайта тоже нельзя, будет странно пересекаться с именем полины. что думаешь? можно попорбовать сделать так: отделить другим материалом(табличка и че-нить еще) верхнюю плашку. где имя и языки. и ниже уже часть со стеной, которая перемещается. тогда лампы можно поставить на границе этой стены. будет выглядеть хорошо. тогда и тень снизу логичная
-2. картины не кликабельны
-3. обложки явно меньше и можно поставить их друг над другом
-4. все еще не чувствую, что это галерея. не хватает стены 
-5. сделай мне фон текстурой черной покрашенной стены. чтоб она была текстурная и чтоб всем было очевидно, что это стена. и стена двигается вместе с картинами
-6. добавь веревочки и гвоздики на которых висят некоторые картины. не все. большие стоят на полу или на гвоздике без веревочки, маленькие на гвоздиках без веревочки,  а средние с веревочкой
-7. а еще добавь ссылку на тг в соцсети. и в мобилку и в десктоп https://t.me/polindrous
 
-ПИШИ ТЕКСТОМ.
+
+почему на моем сайте есть на стене картин есть жесткие линии
+то есть например прямо за помидорами и рыбами(в одну линию которые) видно жесткую линию, где стена резко становится темнее
+а слева и справа головы гудона и апполона широкие полосы, которые просто резко темные, потом свет нормальный
+
+ПИШИ ТЕКСТОМ КОД
+пиши в формате ПОМЕЯНЙ КОД А НА КОД Б
+где код А и Б идеальная точная копия кода из оригинала, с правильной табуляцией(даже если весь код на уровне табуляции), без троеточий и додумываний, со всеми ориг комментариями. короче так, чтоб я мог найти этот код через cntrl+f. 
