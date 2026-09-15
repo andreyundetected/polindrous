@@ -67,12 +67,12 @@ img{ max-width:100%; display:block; }
 .lang-btn.is-active{ color: var(--ink); border-color: var(--ink); }
 
 /* ============================================
-   SOCIAL — email + Instagram, always on screen
+   SOCIAL - email + Instagram, always on screen
    ============================================ */
 .social-bar{
   position: fixed;
   left: 50%;
-  bottom: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
   transform: translateX(-50%);
   z-index: 35;
   display: flex;
@@ -92,7 +92,7 @@ img{ max-width:100%; display:block; }
 .social-bar svg{ width: 100%; height: 100%; display: block; }
 
 /* ============================================
-   STAGE — two states, one screen.
+   STAGE - two states, one screen.
    ============================================ */
 .stage{
   position: relative;
@@ -189,7 +189,7 @@ img{ max-width:100%; display:block; }
 
 /* pushed down clear of the language switch, given real weight */
 .compact-bar{
-  padding: 104px 56px 14px;
+  padding: 86px 56px 14px;
   text-align: center;
 }
 .compact-bar .name{
@@ -207,7 +207,7 @@ img{ max-width:100%; display:block; }
 }
 
 /* ---- the carousel: discrete, indexed, circular.
-   Every item is absolutely positioned by script.js —
+   Every item is absolutely positioned by script.js -
    x offset (in vw) and scale come from a chain layout
    that guarantees a real gap between neighbours,
    whatever their width. ---- */
@@ -227,7 +227,7 @@ img{ max-width:100%; display:block; }
 .carousel-item{
   position: absolute;
   left: 50%;
-  top: 42%;
+  top: var(--anchor-y, 42%);
   transform-origin: center;
   cursor: pointer;
   transition: transform .5s cubic-bezier(.22,.8,.25,1),
@@ -280,7 +280,7 @@ img{ max-width:100%; display:block; }
 }
 
 /* ============================================
-   LIGHTBOX — full-size view, animated open/close
+   LIGHTBOX - full-size view, animated open/close
    ============================================ */
 .lightbox{
   position: fixed; inset: 0; z-index: 50;

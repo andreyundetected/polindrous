@@ -3,7 +3,7 @@
 const CONTENT = {
   ru: {
     heroName: "Полина Павлова",
-    heroLine: "Иллюстрирует книги, рисует людей и собирает афиши — от карандаша до диджитала.",
+    heroLine: "Иллюстрирует книги, рисует людей и собирает афиши - от карандаша до диджитала.",
     digitalTitle: "Диджитал",
     digitalDesc: "Афиши и обложки, собранные под конкретное событие.",
     watercolorTitle: "Акварель",
@@ -35,7 +35,7 @@ const CONTENT = {
 
   en: {
     heroName: "Polina Pavlova",
-    heroLine: "Illustrates books, draws people, and designs posters — from pencil to digital.",
+    heroLine: "Illustrates books, draws people, and designs posters - from pencil to digital.",
     digitalTitle: "Digital",
     digitalDesc: "Posters and covers, each built around a specific event.",
     watercolorTitle: "Watercolor",
@@ -43,7 +43,7 @@ const CONTENT = {
     pencilTitle: "Pencil",
     pencilDesc: "Academic drawing: figure, portrait, still life, close attention to form.",
     outroName: "Polina Pavlova",
-    outroLine: "Open to commissions — illustration, covers, posters.",
+    outroLine: "Open to commissions - illustration, covers, posters.",
     alts: {
       gnezdo: "Cover of the comic “The Nest”",
       kapustnikBw: "Poetry night poster, black-and-white version",
@@ -67,7 +67,7 @@ const CONTENT = {
 
   sr: {
     heroName: "Polina Pavlova",
-    heroLine: "Ilustruje knjige, crta ljude i pravi plakate — od olovke do digitala.",
+    heroLine: "Ilustruje knjige, crta ljude i pravi plakate - od olovke do digitala.",
     digitalTitle: "Digitalno",
     digitalDesc: "Plakati i korice, napravljeni za konkretan događaj.",
     watercolorTitle: "Akvarel",
@@ -75,7 +75,7 @@ const CONTENT = {
     pencilTitle: "Olovka",
     pencilDesc: "Akademski crtež: figura, portret, mrtva priroda, pažnja posvećena formi.",
     outroName: "Polina Pavlova",
-    outroLine: "Otvorena za saradnju — ilustracija, korice, plakati.",
+    outroLine: "Otvorena za saradnju - ilustracija, korice, plakati.",
     alts: {
       gnezdo: "Korica stripa „Gnezdo“",
       kapustnikBw: "Plakat za pesničko veče, crno-bela verzija",

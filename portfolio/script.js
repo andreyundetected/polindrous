@@ -20,7 +20,7 @@
     window.removeEventListener('touchstart', onTouchStart);
     window.removeEventListener('touchmove', onTouchMove);
     window.removeEventListener('keydown', onKeyIntent);
-    setTimeout(() => { render(); showCaptionThenFade(); }, 260); // stage is now laid out
+    setTimeout(() => { recomputeAnchor(); render(); showCaptionThenFade(); }, 260); // stage is now laid out
   }
   function onWheelIntent(e) { if (e.deltaY > 4) reveal(); }
   let touchStartY = 0;
@@ -67,7 +67,7 @@
   /* ----------------------------------------------------
      3. The carousel.
      Layout: every item's on-screen x-offset (in vw) and
-     scale come from a "chain" — starting at the active
+     scale come from a "chain" - starting at the active
      item's own edge, each next item is placed at
      (previous item's far edge + GAP + this item's own
      half-width). That guarantees a real gap between any
@@ -81,8 +81,8 @@
   const items = Array.from(track.querySelectorAll('.carousel-item'));
   const N = items.length;
 
-  const PORTRAIT_HALF = 31;   // vw — half of --portrait-w
-  const LANDSCAPE_HALF = 42;  // vw — half of --landscape-w
+  const PORTRAIT_HALF = 31;   // vw - half of --portrait-w
+  const LANDSCAPE_HALF = 42;  // vw - half of --landscape-w
   const GAP_VW = 4;
   const MAX_CHAIN = 8;
 
@@ -165,6 +165,46 @@
     });
   }
 
+  // ---- dynamic vertical budget: measures the real, live
+  // position of the name/tagline and the social icons on
+  // THIS device (safe-area insets included), then picks one
+  // shared anchor point for every image so a 3-line caption
+  // always has guaranteed room above the social icons.
+  let anchorYPx = 0;
+
+  function itemFinalHeightPx(item) {
+    const img = item.querySelector('img');
+    const w = parseFloat(img.getAttribute('width'));
+    const h = parseFloat(img.getAttribute('height'));
+    const isLandscape = item.dataset.orientation === 'landscape';
+    const boxWpx = (isLandscape ? LANDSCAPE_HALF : PORTRAIT_HALF) * 2 / 100 * window.innerWidth;
+    return boxWpx * (h / w);
+  }
+
+  function recomputeAnchor() {
+    const stageRect = stage.getBoundingClientRect();
+    const compactBar = document.querySelector('.compact-bar');
+    const socialBar = document.querySelector('.social-bar');
+    const compactBottom = compactBar ? compactBar.getBoundingClientRect().bottom : stageRect.top;
+    const socialTop = socialBar ? socialBar.getBoundingClientRect().top : stageRect.bottom;
+
+    const captionStyle = getComputedStyle(caption);
+    const lineHeightPx = parseFloat(captionStyle.lineHeight) || 22;
+    const captionPadV = (parseFloat(captionStyle.paddingTop) || 0) + (parseFloat(captionStyle.paddingBottom) || 0);
+    const captionZoneH = lineHeightPx * 3 + captionPadV + 18; // room for up to 3 lines, plus the gap above
+
+    const tallestHalf = Math.max(...items.map(itemFinalHeightPx)) / 2;
+    const maxBottomInStage = (socialTop - 12) - stageRect.top;
+    const minTopInStage = (compactBottom + 18) - stageRect.top;
+
+    let anchor = maxBottomInStage - captionZoneH - tallestHalf;
+    const minAnchor = minTopInStage + tallestHalf;
+    if (anchor < minAnchor) anchor = minAnchor; // never collide with the header, even if that crowds the caption
+
+    anchorYPx = anchor;
+    track.style.setProperty('--anchor-y', anchorYPx + 'px');
+  }
+
   function render() {
     applyLayout(computeLayout(activeIndex));
     positionCaption();
@@ -173,28 +213,27 @@
   // ---- analytic caption placement: computed from the
   // active item's known final size, not measured mid-
   // transition, so it's correct even while animating.
+  // Never needs a hard cap - recomputeAnchor() already
+  // guaranteed the room beneath the tallest possible image.
   function positionCaption() {
     const item = items[activeIndex];
     const img = item.querySelector('img');
     const w = parseFloat(img.getAttribute('width'));
     const h = parseFloat(img.getAttribute('height'));
-    const stageH = stage.getBoundingClientRect().height;
-    const viewportW = window.innerWidth;
 
     const isLandscape = item.dataset.orientation === 'landscape';
-    const boxWpx = (isLandscape ? LANDSCAPE_HALF : PORTRAIT_HALF) * 2 / 100 * viewportW;
+    const boxWpx = (isLandscape ? LANDSCAPE_HALF : PORTRAIT_HALF) * 2 / 100 * window.innerWidth;
     const finalHpx = boxWpx * (h / w);
 
-    const centerY = stageH * 0.42;
-    const bottomY = centerY + finalHpx / 2;
-    caption.style.top = Math.min(bottomY + 14, stageH - 58) + 'px';
+    const bottomY = anchorYPx + finalHpx / 2;
+    caption.style.top = (bottomY + 14) + 'px';
   }
 
   function buildCaption(item) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
     const chapter = dict[item.dataset.chapterKey] || '';
     const alt = (dict.alts && dict.alts[item.dataset.altKey]) || '';
-    return chapter && alt ? `${chapter} — ${alt}` : (chapter || alt);
+    return chapter && alt ? `${chapter} - ${alt}` : (chapter || alt);
   }
 
   let captionHideTimer = null;
@@ -224,7 +263,7 @@
 
   // ---- drag: live 1:1 follow while dragging (transitions
   // off), release either commits one step, springs back,
-  // or — on a downward swipe — returns to the hero screen.
+  // or - on a downward swipe - returns to the hero screen.
   let dragging = false, dragStartX = 0, dragStartY = 0;
   let dragCurrentVW = 0, dragCurrentPxX = 0, dragCurrentPxY = 0;
 
@@ -294,10 +333,10 @@
     else goTo(idx);
   });
 
-  window.addEventListener('resize', () => { render(); });
+  window.addEventListener('resize', () => { recomputeAnchor(); render(); });
 
   /* ----------------------------------------------------
-     4. Lightbox — animated open/close, caption stays
+     4. Lightbox - animated open/close, caption stays
         until closed.
   ---------------------------------------------------- */
   const lightbox = document.getElementById('lightbox');
@@ -326,5 +365,6 @@
   let savedLang = 'en';
   try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
   applyLanguage(savedLang);
+  recomputeAnchor();
   render();
 })();

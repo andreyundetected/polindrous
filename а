@@ -27,7 +27,7 @@ content.js
 const CONTENT = {
   ru: {
     heroName: "Полина Павлова",
-    heroLine: "Иллюстрирует книги, рисует людей и собирает афиши — от карандаша до диджитала.",
+    heroLine: "Иллюстрирует книги, рисует людей и собирает афиши - от карандаша до диджитала.",
     digitalTitle: "Диджитал",
     digitalDesc: "Афиши и обложки, собранные под конкретное событие.",
     watercolorTitle: "Акварель",
@@ -59,7 +59,7 @@ const CONTENT = {
 
   en: {
     heroName: "Polina Pavlova",
-    heroLine: "Illustrates books, draws people, and designs posters — from pencil to digital.",
+    heroLine: "Illustrates books, draws people, and designs posters - from pencil to digital.",
     digitalTitle: "Digital",
     digitalDesc: "Posters and covers, each built around a specific event.",
     watercolorTitle: "Watercolor",
@@ -67,7 +67,7 @@ const CONTENT = {
     pencilTitle: "Pencil",
     pencilDesc: "Academic drawing: figure, portrait, still life, close attention to form.",
     outroName: "Polina Pavlova",
-    outroLine: "Open to commissions — illustration, covers, posters.",
+    outroLine: "Open to commissions - illustration, covers, posters.",
     alts: {
       gnezdo: "Cover of the comic “The Nest”",
       kapustnikBw: "Poetry night poster, black-and-white version",
@@ -91,7 +91,7 @@ const CONTENT = {
 
   sr: {
     heroName: "Polina Pavlova",
-    heroLine: "Ilustruje knjige, crta ljude i pravi plakate — od olovke do digitala.",
+    heroLine: "Ilustruje knjige, crta ljude i pravi plakate - od olovke do digitala.",
     digitalTitle: "Digitalno",
     digitalDesc: "Plakati i korice, napravljeni za konkretan događaj.",
     watercolorTitle: "Akvarel",
@@ -99,7 +99,7 @@ const CONTENT = {
     pencilTitle: "Olovka",
     pencilDesc: "Akademski crtež: figura, portret, mrtva priroda, pažnja posvećena formi.",
     outroName: "Polina Pavlova",
-    outroLine: "Otvorena za saradnju — ilustracija, korice, plakati.",
+    outroLine: "Otvorena za saradnju - ilustracija, korice, plakati.",
     alts: {
       gnezdo: "Korica stripa „Gnezdo“",
       kapustnikBw: "Plakat za pesničko veče, crno-bela verzija",
@@ -135,8 +135,8 @@ index.html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Полина Павлова — иллюстрация и графический дизайн</title>
-<meta name="description" content="Полина Павлова — иллюстрация, книжные обложки, графический дизайн. Диджитал, акварель, карандаш.">
+<title>Полина Павлова - иллюстрация и графический дизайн</title>
+<meta name="description" content="Полина Павлова - иллюстрация, книжные обложки, графический дизайн. Диджитал, акварель, карандаш.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -184,7 +184,7 @@ index.html
   <!-- STATE 1: hero -->
   <section class="hero-view" id="heroView">
     <h1 class="hero-name" data-i18n="heroName">Polina Pavlova</h1>
-    <p class="hero-line" data-i18n="heroLine">Illustrates books, draws people, and designs posters — from pencil to digital.</p>
+    <p class="hero-line" data-i18n="heroLine">Illustrates books, draws people, and designs posters - from pencil to digital.</p>
     <button class="scroll-cue" id="scrollCue" aria-label="Листать"><span class="chevron"></span></button>
   </section>
 
@@ -192,7 +192,7 @@ index.html
   <section class="carousel-view" id="carouselView">
     <header class="compact-bar">
       <p class="name" data-i18n="heroName">Polina Pavlova</p>
-      <p class="line" data-i18n="heroLine">Illustrates books, draws people, and designs posters — from pencil to digital.</p>
+      <p class="line" data-i18n="heroLine">Illustrates books, draws people, and designs posters - from pencil to digital.</p>
     </header>
 
     <div class="carousel-stage">
@@ -319,7 +319,7 @@ script.js
   scrollCue.addEventListener('click', reveal);
 
   /* ----------------------------------------------------
-     2. Language — swap [data-i18n] text / [data-i18n-alt]
+     2. Language - swap [data-i18n] text / [data-i18n-alt]
         alts from content.js, refresh the visible caption.
   ---------------------------------------------------- */
   let currentLang = 'ru';
@@ -353,11 +353,11 @@ script.js
   });
 
   /* ----------------------------------------------------
-     3. The carousel — one track, all 17 works. Real 3D:
+     3. The carousel - one track, all 17 works. Real 3D:
         each card's distance from centre (in card-slots,
         not pixels) drives rotateY + translateZ inside a
         perspective container, so the browser's own 3D
-        projection shrinks and dims side cards — no manual
+        projection shrinks and dims side cards - no manual
         scale hack. Landing on a card shows its caption for
         about a second, then it fades on its own.
   ---------------------------------------------------- */
@@ -369,7 +369,7 @@ script.js
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
     const chapter = dict[item.dataset.chapterKey] || '';
     const alt = (dict.alts && dict.alts[item.dataset.altKey]) || '';
-    return chapter && alt ? `${chapter} — ${alt}` : (chapter || alt);
+    return chapter && alt ? `${chapter} - ${alt}` : (chapter || alt);
   }
 
   let active = null;
@@ -447,7 +447,7 @@ script.js
   applyLanguage(savedLang);
 
   /* ----------------------------------------------------
-     4. Lightbox — click any sharp image to enlarge.
+     4. Lightbox - click any sharp image to enlarge.
   ---------------------------------------------------- */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
@@ -541,7 +541,7 @@ img{ max-width:100%; display:block; }
 .lang-btn.is-active{ color: var(--ink); border-color: var(--ink); }
 
 /* ============================================
-   SOCIAL — email + Instagram, always on screen
+   SOCIAL - email + Instagram, always on screen
    ============================================ */
 .social-bar{
   position: fixed;
@@ -566,7 +566,7 @@ img{ max-width:100%; display:block; }
 .social-bar svg{ width: 100%; height: 100%; display: block; }
 
 /* ============================================
-   STAGE — two states occupying the same screen:
+   STAGE - two states occupying the same screen:
    hero-view (state 1) and carousel-view (state 2).
    A single scroll/swipe/click gesture crossfades
    from one to the other, once.
@@ -707,7 +707,7 @@ img{ max-width:100%; display:block; }
 
 .carousel-item{
   flex: 0 0 54vw;
-  margin-right: -8vw; /* slight overlap — a fanned deck, not a flat ribbon */
+  margin-right: -8vw; /* slight overlap - a fanned deck, not a flat ribbon */
   scroll-snap-align: center;
   scroll-snap-stop: always;
   display: flex;
