@@ -1,27 +1,45 @@
-digital-01-gnezdo-cover.jpg 
-digital-02-kapustnik-bw.jpg 
-digital-03-poster-green.jpg 
-grain.png 
-pencil-01-still-life.jpg 
-pencil-02-torso-back.jpg 
-pencil-03-torso-front.jpg 
-pencil-04-figure-standing.jpg 
-pencil-05-figure-seated.jpg 
-pencil-06-houdon.jpg 
-pencil-07-apollo.jpg 
-watercolor-01-tomatoes.jpg 
-watercolor-02-fish.jpg 
-watercolor-03-still-life.jpg 
-watercolor-04-exit-poster.jpg 
-watercolor-05-heart-cover.jpg 
-watercolor-06-metamorphosis-cover.jpg 
-watercolor-07-matilda-cover.jpg
+portfolio/images/digital-01-gnezdo-cover.jpg 
+portfolio/images/digital-02-kapustnik-bw.jpg 
+portfolio/images/digital-03-poster-green.jpg 
+portfolio/images/grain.png 
+portfolio/images/pencil-01-still-life.jpg 
+portfolio/images/pencil-02-torso-back.jpg 
+portfolio/images/pencil-03-torso-front.jpg 
+portfolio/images/pencil-04-figure-standing.jpg 
+portfolio/images/pencil-05-figure-seated.jpg 
+portfolio/images/pencil-06-houdon.jpg 
+portfolio/images/pencil-07-apollo.jpg 
+portfolio/images/watercolor-01-tomatoes.jpg 
+portfolio/images/watercolor-02-fish.jpg 
+portfolio/images/watercolor-03-still-life.jpg 
+portfolio/images/watercolor-04-exit-poster.jpg 
+portfolio/images/watercolor-05-heart-cover.jpg 
+portfolio/images/watercolor-06-metamorphosis-cover.jpg 
+portfolio/images/watercolor-07-matilda-cover.jpg
 
 
 
+portfolio/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Полина Павлова — иллюстрация и графический дизайн</title>
+<style>html,body{margin:0;height:100%;background:#17130f;}</style>
+</head>
+<body>
+<script>
+  var target = (window.matchMedia('(min-width: 860px) and (pointer: fine)').matches)
+    ? 'desktop/index.html' : 'mobile/index.html';
+  location.replace(target);
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=mobile/index.html"></noscript>
+</body>
+</html>
 
 
-content.js
+portfolio/content.js 
 /* All page text, one place per language, so nothing needs
    translating inline in index.html or script.js. */
 const CONTENT = {
@@ -126,17 +144,14 @@ const CONTENT = {
 
 
 
-
-
-
-index.html
+portfolio/desktop/index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Полина Павлова - иллюстрация и графический дизайн</title>
-<meta name="description" content="Полина Павлова - иллюстрация, книжные обложки, графический дизайн. Диджитал, акварель, карандаш.">
+<title>Polina Pavlova — illustration and graphic design</title>
+<meta name="description" content="Polina Pavlova — illustration, book covers, graphic design. Digital, watercolor, pencil.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,6 +161,7 @@ index.html
 </head>
 <body>
 
+<div class="wall-texture" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
 <div class="lang-switch">
@@ -179,92 +195,161 @@ index.html
   </a>
 </div>
 
-<div class="stage" id="stage">
+<header class="identity">
+  <p class="name" data-i18n="heroName">Polina Pavlova</p>
+  <p class="line" data-i18n="heroLine">Illustrates books, draws people, and designs posters — from pencil to digital.</p>
+</header>
 
-  <!-- STATE 1: hero -->
-  <section class="hero-view" id="heroView">
-    <h1 class="hero-name" data-i18n="heroName">Polina Pavlova</h1>
-    <p class="hero-line" data-i18n="heroLine">Illustrates books, draws people, and designs posters - from pencil to digital.</p>
-    <button class="scroll-cue" id="scrollCue" aria-label="Листать"><span class="chevron"></span></button>
-  </section>
+<div class="wall-track" id="wallTrack">
 
-  <!-- STATE 2: carousel -->
-  <section class="carousel-view" id="carouselView">
-    <header class="compact-bar">
-      <p class="name" data-i18n="heroName">Polina Pavlova</p>
-      <p class="line" data-i18n="heroLine">Illustrates books, draws people, and designs posters - from pencil to digital.</p>
-    </header>
+  <!-- ============ DIGITAL ============ -->
+  <figure class="wall-item" style="--h:42vh; --dy:-10px; --mr:64px" data-chapter-key="digitalTitle" data-alt-key="gnezdo">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/digital-01-gnezdo-cover.jpg" width="895" height="1400" alt="Cover of the comic The Nest" data-i18n-alt="gnezdo" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
 
-    <div class="carousel-stage">
-      <div class="carousel-track" id="track">
+  <figure class="wall-item" style="--h:42vh; --dy:18px; --mr:22px" data-chapter-key="digitalTitle" data-alt-key="kapustnikBw">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/digital-02-kapustnik-bw.jpg" width="905" height="1280" alt="Poetry night poster, black-and-white version" data-i18n-alt="kapustnikBw" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
 
-        <div class="carousel-item" data-chapter-key="digitalTitle" data-alt-key="gnezdo">
-          <img src="images/digital-01-gnezdo-cover.jpg" width="895" height="1400" alt="Обложка комикса «Гнездо»" data-i18n-alt="gnezdo" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="digitalTitle" data-alt-key="kapustnikBw">
-          <img src="images/digital-02-kapustnik-bw.jpg" width="905" height="1280" alt="Афиша поэтического капустника, чёрно-белая версия" data-i18n-alt="kapustnikBw" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="digitalTitle" data-alt-key="kapustnikGreen">
-          <img src="images/digital-03-poster-green.jpg" width="904" height="1280" alt="Афиша поэтического капустника, зелёная версия" data-i18n-alt="kapustnikGreen" loading="lazy">
-        </div>
+  <figure class="wall-item" style="--h:42vh; --dy:-22px; --mr:64px" data-chapter-key="digitalTitle" data-alt-key="kapustnikGreen">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/digital-03-poster-green.jpg" width="904" height="1280" alt="Poetry night poster, green version" data-i18n-alt="kapustnikGreen" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
 
-        <div class="carousel-item" data-chapter-key="watercolorTitle" data-alt-key="tomatoes">
-          <img src="images/watercolor-01-tomatoes.jpg" width="891" height="1280" alt="Акварельный этюд, помидоры" data-i18n-alt="tomatoes" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="watercolorTitle" data-alt-key="fish">
-          <img src="images/watercolor-02-fish.jpg" width="862" height="1240" alt="Акварельный этюд, рыбы" data-i18n-alt="fish" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="watercolorTitle" data-alt-key="watercolorStillLife">
-          <img src="images/watercolor-03-still-life.jpg" width="901" height="1280" alt="Акварельный натюрморт" data-i18n-alt="watercolorStillLife" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="watercolorTitle" data-alt-key="exitPoster">
-          <img src="images/watercolor-04-exit-poster.jpg" width="639" height="905" alt="Афиша фестиваля Exit" data-i18n-alt="exitPoster" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="watercolorTitle" data-alt-key="heartCover">
-          <img src="images/watercolor-05-heart-cover.jpg" width="875" height="616" alt="Обложка книги «Собачье сердце»" data-i18n-alt="heartCover" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="watercolorTitle" data-alt-key="metamorphosisCover">
-          <img src="images/watercolor-06-metamorphosis-cover.jpg" width="870" height="597" alt="Обложка книги «Превращение»" data-i18n-alt="metamorphosisCover" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="watercolorTitle" data-alt-key="matildaCover">
-          <img src="images/watercolor-07-matilda-cover.jpg" width="917" height="640" alt="Обложка книги «Матильда»" data-i18n-alt="matildaCover" loading="lazy">
-        </div>
+  <!-- ============ WATERCOLOR ============ -->
+  <figure class="wall-item" style="--h:21vh; --dy:30px; --mr:16px" data-chapter-key="watercolorTitle" data-alt-key="tomatoes">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/watercolor-01-tomatoes.jpg" width="891" height="1280" alt="Watercolor study, tomatoes" data-i18n-alt="tomatoes" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
 
-        <div class="carousel-item" data-chapter-key="pencilTitle" data-alt-key="pencilStillLife">
-          <img src="images/pencil-01-still-life.jpg" width="837" height="1176" alt="Карандашный натюрморт" data-i18n-alt="pencilStillLife" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="pencilTitle" data-alt-key="torsoBack">
-          <img src="images/pencil-02-torso-back.jpg" width="839" height="1124" alt="Разрисовка мышц, вид сзади" data-i18n-alt="torsoBack" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="pencilTitle" data-alt-key="torsoFront">
-          <img src="images/pencil-03-torso-front.jpg" width="863" height="1209" alt="Разрисовка мышц, вид спереди" data-i18n-alt="torsoFront" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="pencilTitle" data-alt-key="figureStanding">
-          <img src="images/pencil-04-figure-standing.jpg" width="854" height="1248" alt="Мужская фигура, стоя" data-i18n-alt="figureStanding" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="pencilTitle" data-alt-key="figureSeated">
-          <img src="images/pencil-05-figure-seated.jpg" width="622" height="932" alt="Мужчина сидит на стуле" data-i18n-alt="figureSeated" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="pencilTitle" data-alt-key="houdon">
-          <img src="images/pencil-06-houdon.jpg" width="763" height="1076" alt="Гипсовая голова, слепок Гудона" data-i18n-alt="houdon" loading="lazy">
-        </div>
-        <div class="carousel-item" data-chapter-key="pencilTitle" data-alt-key="apollo">
-          <img src="images/pencil-07-apollo.jpg" width="732" height="1031" alt="Гипсовая голова Аполлона" data-i18n-alt="apollo" loading="lazy">
-        </div>
+  <figure class="wall-item" style="--h:21vh; --dy:-14px; --mr:16px" data-chapter-key="watercolorTitle" data-alt-key="fish">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/watercolor-02-fish.jpg" width="862" height="1240" alt="Watercolor study, fish" data-i18n-alt="fish" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
 
-      </div>
-      <p class="caption" id="caption" aria-hidden="true"></p>
-    </div>
-  </section>
+  <figure class="wall-item" style="--h:21vh; --dy:12px; --mr:64px" data-chapter-key="watercolorTitle" data-alt-key="watercolorStillLife">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/watercolor-03-still-life.jpg" width="901" height="1280" alt="Watercolor still life" data-i18n-alt="watercolorStillLife" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:42vh; --dy:-18px; --mr:64px" data-chapter-key="watercolorTitle" data-alt-key="exitPoster">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/watercolor-04-exit-poster.jpg" width="639" height="905" alt="Poster for the Exit festival" data-i18n-alt="exitPoster" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:30vh; --dy:22px; --mr:20px" data-chapter-key="watercolorTitle" data-alt-key="heartCover">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/watercolor-05-heart-cover.jpg" width="875" height="616" alt="Cover of Heart of a Dog" data-i18n-alt="heartCover" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:30vh; --dy:-8px; --mr:20px" data-chapter-key="watercolorTitle" data-alt-key="metamorphosisCover">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/watercolor-06-metamorphosis-cover.jpg" width="870" height="597" alt="Cover of The Metamorphosis" data-i18n-alt="metamorphosisCover" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:30vh; --dy:16px; --mr:64px" data-chapter-key="watercolorTitle" data-alt-key="matildaCover">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/watercolor-07-matilda-cover.jpg" width="917" height="640" alt="Cover of Matilda" data-i18n-alt="matildaCover" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <!-- ============ PENCIL ============ -->
+  <figure class="wall-item" style="--h:59vh; --dy:-30px; --mr:64px" data-chapter-key="pencilTitle" data-alt-key="pencilStillLife">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/pencil-01-still-life.jpg" width="837" height="1176" alt="Pencil still life" data-i18n-alt="pencilStillLife" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:59vh; --dy:10px; --mr:26px" data-chapter-key="pencilTitle" data-alt-key="torsoBack">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/pencil-02-torso-back.jpg" width="839" height="1124" alt="Muscle study, back view" data-i18n-alt="torsoBack" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:59vh; --dy:-20px; --mr:64px" data-chapter-key="pencilTitle" data-alt-key="torsoFront">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/pencil-03-torso-front.jpg" width="863" height="1209" alt="Muscle study, front view" data-i18n-alt="torsoFront" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:60vh; --dy:6px; --mr:26px" data-chapter-key="pencilTitle" data-alt-key="figureStanding">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/pencil-04-figure-standing.jpg" width="854" height="1248" alt="Male figure, standing" data-i18n-alt="figureStanding" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:60vh; --dy:-12px; --mr:64px" data-chapter-key="pencilTitle" data-alt-key="figureSeated">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/pencil-05-figure-seated.jpg" width="622" height="932" alt="Man seated on a chair" data-i18n-alt="figureSeated" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:42vh; --dy:24px; --mr:24px" data-chapter-key="pencilTitle" data-alt-key="houdon">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/pencil-06-houdon.jpg" width="763" height="1076" alt="Plaster cast head, Houdon" data-i18n-alt="houdon" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
+
+  <figure class="wall-item" style="--h:42vh; --dy:-6px; --mr:0px" data-chapter-key="pencilTitle" data-alt-key="apollo">
+    <span class="spot" aria-hidden="true"></span>
+    <div class="frame"><div class="mat">
+      <img src="../images/pencil-07-apollo.jpg" width="732" height="1031" alt="Plaster cast head, Apollo" data-i18n-alt="apollo" loading="lazy">
+    </div></div>
+    <figcaption class="plaque"></figcaption>
+  </figure>
 
 </div>
 
 <div class="lightbox" id="lightbox" aria-hidden="true">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">×</button>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
   <img id="lightboxImg" src="" alt="">
+  <p class="lightbox-caption" id="lightboxCaption"></p>
 </div>
 
-<script src="content.js"></script>
+<script src="../content.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
@@ -272,64 +357,16 @@ index.html
 
 
 
-
-script.js 
+portfolio/desktop/script.js
 (() => {
   'use strict';
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ----------------------------------------------------
-     1. Hero → carousel reveal. One state machine, one
-        transition, triggered once by the first real
-        scroll/swipe/keyboard/click "next" gesture.
-  ---------------------------------------------------- */
-  const heroView = document.getElementById('heroView');
-  const carouselView = document.getElementById('carouselView');
-  const scrollCue = document.getElementById('scrollCue');
-
-  let revealed = false;
-  function reveal() {
-    if (revealed) return;
-    revealed = true;
-    heroView.classList.add('is-leaving');
-    carouselView.classList.add('is-active');
-    window.removeEventListener('wheel', onWheelIntent);
-    window.removeEventListener('touchstart', onTouchStart);
-    window.removeEventListener('touchmove', onTouchMove);
-    window.removeEventListener('keydown', onKeyIntent);
-  }
-
-  function onWheelIntent(e) {
-    if (e.deltaY > 4) reveal();
-  }
-  let touchStartY = 0;
-  function onTouchStart(e) { touchStartY = e.touches[0].clientY; }
-  function onTouchMove(e) {
-    if (touchStartY - e.touches[0].clientY > 12) reveal();
-  }
-  function onKeyIntent(e) {
-    if (['ArrowDown', 'PageDown', ' '].includes(e.key)) reveal();
-  }
-
-  window.addEventListener('wheel', onWheelIntent, { passive: true });
-  window.addEventListener('touchstart', onTouchStart, { passive: true });
-  window.addEventListener('touchmove', onTouchMove, { passive: true });
-  window.addEventListener('keydown', onKeyIntent);
-  scrollCue.addEventListener('click', reveal);
-
-  /* ----------------------------------------------------
-     2. Language - swap [data-i18n] text / [data-i18n-alt]
-        alts from content.js, refresh the visible caption.
-  ---------------------------------------------------- */
-  let currentLang = 'ru';
-  let refreshCaption = () => {};
+  let currentLang = 'en';
 
   function applyLanguage(lang) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[lang]) || (typeof CONTENT !== 'undefined' && CONTENT.en);
     if (!dict) return;
     currentLang = lang;
-
     document.documentElement.lang = lang === 'sr' ? 'sr-Latn' : lang;
 
     document.querySelectorAll('[data-i18n]').forEach((el) => {
@@ -344,118 +381,132 @@ script.js
       b.classList.toggle('is-active', b.dataset.lang === lang);
     });
 
-    refreshCaption();
+    refreshPlaques();
+    if (lightbox.classList.contains('is-open') && currentLightboxItem) {
+      lightboxCaption.textContent = buildCaption(currentLightboxItem);
+    }
     try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
   }
-
   document.querySelectorAll('.lang-btn').forEach((btn) => {
     btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
   });
 
-  /* ----------------------------------------------------
-     3. The carousel - one track, all 17 works. Real 3D:
-        each card's distance from centre (in card-slots,
-        not pixels) drives rotateY + translateZ inside a
-        perspective container, so the browser's own 3D
-        projection shrinks and dims side cards - no manual
-        scale hack. Landing on a card shows its caption for
-        about a second, then it fades on its own.
-  ---------------------------------------------------- */
-  const track = document.getElementById('track');
-  const caption = document.getElementById('caption');
-  const items = Array.from(track.querySelectorAll('.carousel-item'));
+  const items = Array.from(document.querySelectorAll('.wall-item'));
 
   function buildCaption(item) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
     const chapter = dict[item.dataset.chapterKey] || '';
     const alt = (dict.alts && dict.alts[item.dataset.altKey]) || '';
-    return chapter && alt ? `${chapter} - ${alt}` : (chapter || alt);
+    return chapter && alt ? `${chapter} — ${alt}` : (chapter || alt);
   }
-
-  let active = null;
-  let ticking = false;
-  let captionHideTimer = null;
-
-  function showCaptionThenFade() {
-    if (!caption) return;
-    caption.classList.add('is-visible');
-    clearTimeout(captionHideTimer);
-    captionHideTimer = setTimeout(() => caption.classList.remove('is-visible'), 1000);
-  }
-
-  refreshCaption = () => {
-    if (caption && active) caption.textContent = buildCaption(active);
-  };
-
-  function update() {
-    ticking = false;
-    if (!items.length) return;
-
-    const pitch = items[0].getBoundingClientRect().width - (parseFloat(getComputedStyle(items[0]).marginRight) || 0);
-    const rect = track.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-
-    let closest = null, closestAbs = Infinity;
-
+  function refreshPlaques() {
     items.forEach((item) => {
-      const r = item.getBoundingClientRect();
-      const itemCenter = r.left + r.width / 2;
-      const slot = pitch > 0 ? (itemCenter - centerX) / pitch : 0;
-      const abs = Math.min(Math.abs(slot), 3);
-
-      if (!reduceMotion) {
-        const rotate = Math.max(-46, Math.min(46, slot * -46));
-        const z = -abs * 130;
-        const opacity = Math.max(0.32, 1 - abs * 0.28);
-        const blur = Math.min(3, abs * 1.6);
-        item.style.transform = `translateZ(${z}px) rotateY(${rotate}deg)`;
-        item.style.opacity = String(opacity);
-        item.style.filter = blur > 0.05 ? `blur(${blur}px)` : 'none';
-        item.style.zIndex = String(1000 - Math.round(abs * 100));
-      }
-      if (abs < closestAbs) { closestAbs = abs; closest = item; }
+      const p = item.querySelector('.plaque');
+      if (p) p.textContent = buildCaption(item);
     });
+  }
 
-    if (closest !== active) {
-      active = closest;
-      if (caption) caption.textContent = buildCaption(active);
-      showCaptionThenFade();
+  const track = document.getElementById('wallTrack');
+
+  let velocity = 0;
+  let rafId = null;
+
+  function momentumStep() {
+    track.scrollLeft += velocity;
+    velocity *= 0.92;
+    if (Math.abs(velocity) > 0.4) {
+      rafId = requestAnimationFrame(momentumStep);
+    } else {
+      velocity = 0;
+      rafId = null;
     }
   }
-
-  function onScroll() {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  function kick(v) {
+    velocity += v;
+    if (!rafId) rafId = requestAnimationFrame(momentumStep);
   }
-  track.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', update);
 
-  // Desktop convenience: map vertical wheel to horizontal travel
-  // once the carousel is showing (mouse users have no drag axis).
   track.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      track.scrollLeft += e.deltaY;
+      kick(e.deltaY * 0.45);
       e.preventDefault();
     }
   }, { passive: false });
 
-  update();
-  captionHideTimer = setTimeout(() => { if (caption) caption.classList.add('is-visible'); }, 400);
-  setTimeout(showCaptionThenFade, 500);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') kick(320);
+    if (e.key === 'ArrowLeft') kick(-320);
+  });
 
-  let savedLang = 'en';
-  try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
-  applyLanguage(savedLang);
+  let dragging = false, dragStartX = 0, dragStartScroll = 0, dragMoved = 0;
+  let lastX = 0, lastT = 0, releaseVelocity = 0;
 
-  /* ----------------------------------------------------
-     4. Lightbox - click any sharp image to enlarge.
-  ---------------------------------------------------- */
+  track.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    dragMoved = 0;
+    velocity = 0;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    dragStartX = e.clientX;
+    dragStartScroll = track.scrollLeft;
+    lastX = e.clientX;
+    lastT = performance.now();
+    releaseVelocity = 0;
+    track.classList.add('is-grabbing');
+    track.setPointerCapture(e.pointerId);
+  });
+
+  track.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - dragStartX;
+    dragMoved = Math.max(dragMoved, Math.abs(dx));
+    track.scrollLeft = dragStartScroll - dx;
+
+    const now = performance.now();
+    const dt = now - lastT;
+    if (dt > 0) releaseVelocity = -((e.clientX - lastX) / dt) * 16;
+    lastX = e.clientX;
+    lastT = now;
+  });
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove('is-grabbing');
+    if (Math.abs(releaseVelocity) > 0.4) kick(releaseVelocity);
+  }
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+
+  track.addEventListener('click', (e) => {
+    if (dragMoved > 6) return;
+    const item = e.target.closest('.wall-item');
+    if (item) openLightbox(item);
+  });
+
+  if ('IntersectionObserver' in window) {
+    const spotObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('in-view', entry.isIntersecting);
+      });
+    }, { root: track, threshold: 0.55 });
+
+    items.forEach((item) => spotObserver.observe(item));
+  } else {
+    items.forEach((item) => item.classList.add('in-view'));
+  }
+
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
   const lightboxClose = document.getElementById('lightboxClose');
+  let currentLightboxItem = null;
 
-  function openLightbox(src, alt) {
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || '';
+  function openLightbox(item) {
+    currentLightboxItem = item;
+    const img = item.querySelector('img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = buildCaption(item);
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
   }
@@ -463,25 +514,28 @@ script.js
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
   }
-
-  items.forEach((item) => {
-    const img = item.querySelector('img');
-    img.addEventListener('click', () => openLightbox(img.src, img.alt));
-  });
-
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  let savedLang = 'en';
+  try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
+  applyLanguage(savedLang);
 })();
 
 
 
-styles.css
+
+portfolio/desktop/styles.css
 :root{
-  --bg: #17130f;
+  --bg: #14100c;
   --ink: #efe6d6;
   --muted: rgba(239,230,214,0.6);
   --line: rgba(239,230,214,0.16);
+  --wood-lo: #140d08;
+  --wood-hi: #3e2a19;
+  --gold: #a9895a;
+  --mat: #ece2ce;
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-ui: 'PT Sans', -apple-system, sans-serif;
@@ -496,281 +550,265 @@ html, body{
   color: var(--ink);
   font-family: var(--font-ui);
   -webkit-font-smoothing: antialiased;
-  overflow: hidden; /* single-screen app, not a document to scroll */
+  overflow: hidden;
 }
 
-img{ max-width:100%; display:block; }
+img{ max-width: none; display: block; }
 
-/* ============================================
-   GRAIN
-   ============================================ */
+.wall-texture{
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(115deg, rgba(255,255,255,.02) 0px, rgba(255,255,255,.02) 1px, transparent 1px, transparent 5px),
+    repeating-linear-gradient(25deg, rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 1px, transparent 1px, transparent 7px);
+  pointer-events: none;
+  z-index: 0;
+}
 .grain{
   position: fixed;
   inset: 0;
-  background-image: url('images/grain.png');
+  background-image: url('../images/grain.png');
   background-size: 160px 160px;
-  opacity: 0.05;
+  opacity: 0.045;
   mix-blend-mode: overlay;
   pointer-events: none;
   z-index: 20;
 }
+body::before{
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 46%, transparent 45%, rgba(0,0,0,.4) 100%);
+  pointer-events: none;
+  z-index: 4;
+}
 
-/* ============================================
-   LANGUAGE SWITCH
-   ============================================ */
 .lang-switch{
   position: fixed;
-  top: 16px;
-  left: 16px;
+  top: 22px;
+  left: 26px;
   z-index: 35;
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 .lang-btn{
   background: none;
   border: 1px solid var(--line);
   color: var(--muted);
   font-family: var(--font-ui);
-  font-size: .78rem;
+  font-size: .8rem;
   letter-spacing: .02em;
-  padding: 6px 12px;
+  padding: 6px 13px;
   border-radius: 20px;
   cursor: pointer;
   transition: color .2s ease, border-color .2s ease;
 }
 .lang-btn.is-active{ color: var(--ink); border-color: var(--ink); }
+.lang-btn:hover{ color: var(--ink); }
 
-/* ============================================
-   SOCIAL - email + Instagram, always on screen
-   ============================================ */
 .social-bar{
   position: fixed;
   left: 50%;
-  bottom: 14px;
+  bottom: 22px;
   transform: translateX(-50%);
   z-index: 35;
   display: flex;
-  gap: 16px;
+  gap: 18px;
 }
 .social-bar a{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   color: var(--ink);
-  opacity: .82;
+  opacity: .78;
   transition: opacity .2s ease, transform .2s ease;
 }
 .social-bar a:hover{ opacity: 1; transform: translateY(-1px); }
 .social-bar svg{ width: 100%; height: 100%; display: block; }
 
-/* ============================================
-   STAGE - two states occupying the same screen:
-   hero-view (state 1) and carousel-view (state 2).
-   A single scroll/swipe/click gesture crossfades
-   from one to the other, once.
-   ============================================ */
-.stage{
-  position: relative;
-  height: 100svh;
-  width: 100vw;
-  overflow: hidden;
-}
-
-/* ---- state 1: hero ---- */
-.hero-view{
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px;
-  transition: opacity .7s ease, transform .7s cubic-bezier(.3,.7,.2,1);
-}
-.hero-view.is-leaving{
-  opacity: 0;
-  transform: translateY(-70px) scale(.92);
-  pointer-events: none;
-}
-
-.hero-name{
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.6rem, 9vw, 5.4rem);
-  line-height: 1.05;
-  margin: 0 0 22px;
-  letter-spacing: -0.01em;
-  opacity: 0;
-  transform: translateY(18px);
-  animation: rise 1s cubic-bezier(.2,.7,.3,1) forwards;
-}
-.hero-line{
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
-  color: var(--muted);
-  max-width: 46ch;
-  margin: 0 auto;
-  line-height: 1.5;
-  opacity: 0;
-  transform: translateY(18px);
-  animation: rise 1s cubic-bezier(.2,.7,.3,1) forwards;
-  animation-delay: .35s;
-}
-@keyframes rise{ to{ opacity:1; transform: translateY(0); } }
-
-.scroll-cue{
-  position: absolute;
-  bottom: 66px;
+.identity{
+  position: fixed;
+  top: 34px;
   left: 50%;
   transform: translateX(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 14px;
-  animation: bob 2s ease-in-out infinite;
-}
-.scroll-cue .chevron{
-  display: block;
-  width: 13px;
-  height: 13px;
-  border-right: 2px solid var(--muted);
-  border-bottom: 2px solid var(--muted);
-  transform: rotate(45deg);
-}
-@keyframes bob{
-  0%, 100%{ transform: translate(-50%, 0); }
-  50%{ transform: translate(-50%, 9px); }
-}
-
-/* ---- state 2: carousel ---- */
-.carousel-view{
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transform: translateY(26px);
-  pointer-events: none;
-  transition: opacity .9s ease .15s, transform .9s cubic-bezier(.2,.7,.2,1) .15s;
-}
-.carousel-view.is-active{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.compact-bar{
-  padding: 16px 60px 6px;
   text-align: center;
+  z-index: 5;
+  pointer-events: none;
 }
-.compact-bar .name{
+.identity .name{
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.7rem;
   margin: 0;
+  letter-spacing: -0.01em;
 }
-.compact-bar .line{
+.identity .line{
   font-family: var(--font-display);
   font-style: italic;
-  font-size: .76rem;
+  font-size: 1rem;
   color: var(--muted);
-  margin: 2px 0 0;
+  margin: 8px 0 0;
 }
 
-/* ---- the carousel itself: real 3D via perspective +
-   translateZ (not a fake scale trick), so side cards
-   genuinely recede instead of just shrinking flat. ---- */
-.carousel-stage{
-  position: relative;
-  flex: 1;
-  perspective: 1400px;
-  perspective-origin: 50% 50%;
-}
-
-.carousel-track{
-  position: absolute;
-  inset: 0;
+.wall-track{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 120px;
+  bottom: 90px;
   display: flex;
   align-items: center;
+  padding-inline: 12vw;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding-inline: 23vw;
+  cursor: grab;
+  z-index: 2;
 }
-.carousel-track::-webkit-scrollbar{ display: none; }
+.wall-track::-webkit-scrollbar{ display: none; }
+.wall-track.is-grabbing{ cursor: grabbing; }
 
-.carousel-item{
-  flex: 0 0 54vw;
-  margin-right: -8vw; /* slight overlap - a fanned deck, not a flat ribbon */
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
+.wall-item{
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0 var(--mr, 40px) 0 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  will-change: transform, opacity, filter;
+  transform: translateY(var(--dy, 0px));
 }
 
-.carousel-item img{
-  max-width: 100%;
-  max-height: 58svh;
-  width: auto;
-  height: auto;
-  border-radius: 16px;
-  box-shadow: 0 30px 70px rgba(0,0,0,.55);
-  cursor: zoom-in;
-  display: block;
-}
-
-.caption{
+.spot{
   position: absolute;
+  top: -52px;
   left: 50%;
-  bottom: 8px;
-  transform: translateX(-50%);
-  margin: 0;
-  padding: 7px 16px;
-  font-size: .82rem;
-  color: var(--muted);
-  white-space: nowrap;
-  max-width: 92vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 78%;
+  height: 80px;
+  transform: translateX(-50%) scaleY(.4);
+  transform-origin: top center;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,232,185,.4) 0%, transparent 72%);
+  filter: blur(7px);
   opacity: 0;
-  transition: opacity .45s ease;
+  transition: opacity .7s ease, transform .7s ease;
   pointer-events: none;
+  z-index: 1;
 }
-.caption.is-visible{ opacity: 1; }
+.wall-item.in-view .spot{
+  opacity: 1;
+  transform: translateX(-50%) scaleY(1);
+}
+
+.frame{
+  position: relative;
+  z-index: 2;
+  border-radius: 3px;
+  padding: 15px;
+  background:
+    linear-gradient(150deg, var(--wood-hi) 0%, var(--wood-lo) 55%, #0c0805 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 2px 3px rgba(255,255,255,.16),
+    inset 0 -5px 10px rgba(0,0,0,.65),
+    0 30px 60px rgba(0,0,0,.6);
+}
+
+.mat{
+  display: block;
+  overflow: hidden;
+  border-radius: 1px;
+  border: 3px solid var(--gold);
+  background: var(--mat);
+  padding: clamp(8px, 2.2vh, 22px);
+  box-shadow: inset 0 0 12px rgba(0,0,0,.12);
+}
+
+.wall-item img{
+  display: block;
+  border-radius: 1px;
+  height: var(--h);
+  width: auto;
+  max-width: 56vw;
+  max-height: var(--h);
+  cursor: zoom-in;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.plaque{
+  position: relative;
+  z-index: 2;
+  margin: 16px 0 0;
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  color: var(--muted);
+  text-align: center;
+  max-width: 22vw;
+  line-height: 1.4;
+}
 
 @media (prefers-reduced-motion: reduce){
-  .hero-name, .hero-line{ animation: none; opacity:1; transform:none; }
-  .scroll-cue{ animation: none; }
-  .hero-view, .carousel-view{ transition: opacity .3s ease; }
+  .wall-item, .spot{ transition: none; }
 }
 
-/* ============================================
-   LIGHTBOX
-   ============================================ */
 .lightbox{
   position: fixed; inset: 0; z-index: 50;
-  background: rgba(8,7,6,0.96);
+  background: rgba(8,7,6,0);
   display: flex; align-items: center; justify-content: center;
-  padding: 5vh 5vw;
-  opacity: 0; visibility: hidden;
+  padding: 6vh 6vw;
+  visibility: hidden;
+  transition: background .45s ease, visibility 0s linear .45s;
+}
+.lightbox.is-open{
+  background: rgba(8,7,6,0.9);
+  visibility: visible;
+  transition: background .45s ease, visibility 0s linear 0s;
+}
+
+.lightbox img{
+  max-width: 82vw;
+  max-height: 82svh;
+  width: auto;
+  height: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  opacity: 0;
+  transform: scale(.9);
+  transition: opacity .4s cubic-bezier(.22,.8,.25,1), transform .4s cubic-bezier(.22,.8,.25,1);
+}
+.lightbox.is-open img{ opacity: 1; transform: scale(1); }
+
+.lightbox-caption{
+  position: absolute;
+  left: 50%;
+  bottom: 7vh;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 8px 20px;
+  font-size: 1rem;
+  color: var(--ink);
+  text-align: center;
+  max-width: 70vw;
+  opacity: 0;
+  transition: opacity .4s ease .1s;
+}
+.lightbox.is-open .lightbox-caption{ opacity: 1; }
+
+.lightbox-close{
+  position: absolute;
+  top: 26px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: var(--ink);
+  font-size: 2.1rem;
+  line-height: 1;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  opacity: 0;
   transition: opacity .3s ease;
 }
-.lightbox.is-open{ opacity:1; visibility: visible; }
-.lightbox img{ max-width:100%; max-height:90svh; width:auto; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
-.lightbox-close{
-  position: absolute; top: 20px; right: 24px;
-  background: none; border: none; color: var(--ink);
-  font-size: 2.2rem; line-height: 1; cursor: pointer;
-  font-family: var(--font-ui); opacity: .8;
-}
+.lightbox.is-open .lightbox-close{ opacity: .85; }
 .lightbox-close:hover{ opacity: 1; }
 
 a:focus-visible, button:focus-visible{
@@ -780,49 +818,13 @@ a:focus-visible, button:focus-visible{
 
 
 
+стало лучше, но,
+1. подсветка выглядит странно. она начинается в рандомном месте прямой линией и таким полукругом идет. можно попоробовать под картину, но тогда тень снизу картины будет ставить странно, а я бы хотел. ставить в самом верхну сайта тоже нельзя, будет странно пересекаться с именем полины. что думаешь? можно попорбовать сделать так: отделить другим материалом(табличка и че-нить еще) верхнюю плашку. где имя и языки. и ниже уже часть со стеной, которая перемещается. тогда лампы можно поставить на границе этой стены. будет выглядеть хорошо. тогда и тень снизу логичная
+2. картины не кликабельны
+3. обложки явно меньше и можно поставить их друг над другом
+4. все еще не чувствую, что это галерея. не хватает стены 
+5. сделай мне фон текстурой черной покрашенной стены. чтоб она была текстурная и чтоб всем было очевидно, что это стена. и стена двигается вместе с картинами
+6. добавь веревочки и гвоздики на которых висят некоторые картины. не все. большие стоят на полу или на гвоздике без веревочки, маленькие на гвоздиках без веревочки,  а средние с веревочкой
+7. а еще добавь ссылку на тг в соцсети. и в мобилку и в десктоп https://t.me/polindrous
 
-
-
-
-очень хорошо. но ты все еще делаешь ленту, а я хочу карусель
-
-смотри. может я использую неверный термин, но карусель для меня:
-
-1. последний элемент и первый замкнуты
-2. визуально главный элемент сильно больше остальных и он красиво анимированно увеличивается при пролистовании, пока старый главный уменьшается и уходит
-3. визуально главный как-бы спереди, а остальная карусель сзади
-
-так же
-
-имя и описание при открытие карусели должно быть пониже, а то они перекрывают выбор языка и в целом странно выглядят
-
-сами рисунки главные должны занимать больше места на экране, чтоб их можно было рассмотреть
-
-надпись описание картинки должна быть больше и поближе к рисунку, но ни в коем случае не заходить на него
-
-учитывай, что есть обложки, которые горизонтальные. это важно при проектировании и в целом работе, а так же учитывй, что все рисунки сильно разного размера, но надо подогнать их под один и тот же(ну с поправкой, что они чутка разного формата и отдельно с поправкой что горизонтальные и вертикальные все-таки разные вещи и их не надо приравнивать)
-оставь округленные края
-напиши фул файлы к каждому файлу
-
-
-
-если описывать все с начала, я хочу вот такое(пока только телефонная вреися):
-открываешь сайт, слева вверху выбор языка, посередине имя и описание полины
-пролистываешь вниз, имя аккуратно с красивой анимацией уменьшения и движения перетекает наверх вместе с описаниям, имея небольшой отступ сверху, занимая мало места и в целом в уменьшеном формате 
-с анимацей появляется Карусель, которая занимает почти весь экран, первая картинка - диджитал_1 - гнездо
-Карусель:
-    все вертикальные картинки имеют одинаковую ширину, и чутка разную высоту(чтоб не обрезать их, все такое)
-    горизонтальные же картинки(обложки) имеют одинаковую ширину(чуть больше вертикальных), но не вылезают за края экрана 
-    главная картинка в центре увеличинная и занимает большую часть экрана, остальные картинки по бокам меньше и визуально находятся сзади и по бокам, заезжая за край экрана 
-    при нажатии на главную картинку, она анимированно аккуратно открывается в полном размере на черноме-чутка-прозрачном фоне, с возможностью закрытия по крестику справа вверху, что тоже будет закрывать плавно с анимацией 
-    при полноразмеронм открытии внизу красиво появляется надпись описания, которая пропадает плавно только при закрытии 
-    при пролистывании плавно под главной картинкой появляется надпись описание, которая плавно пропадает через 5 секунд без движения 
-
-    пролистывание жестами, без кнопок
-    пролистывание идет с плавной анимацией, при этом главная картинка плавно уменьшается и уходит в сторону, а новая главная картинка плавно увеличивается и становится в центр
-    пролистывание идет по циклу, то есть последний элемент и первый замкнуты
-    пролистывание с доводчиком, то есть если отпустить палец, то пролистывание плавно доведет до ближайшей картинки и она станет главной
-    не-главные картинки чуть-чуть заблюрены и темнее, чем главная, чтобы визуально было понятно, что они находятся сзади
-
-при открытой карусели при 
-дизайн как лучшие самые свежие дизайны 2026 галерей и портфолио художников
+ПИШИ ТЕКСТОМ.

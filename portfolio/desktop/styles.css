@@ -1,0 +1,253 @@
+:root{
+  --ink: #efe6d6;
+  --muted: rgba(239,230,214,0.6);
+  --line: rgba(239,230,214,0.16);
+  --wood-lo: #140d08;
+  --wood-hi: #3e2a19;
+  --gold: #a9895a;
+  --mat: #ece2ce;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-ui: 'PT Sans', -apple-system, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  margin: 0;
+  height: 100%;
+  background: #0a0a0a;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+}
+
+img{ max-width: none; display: block; }
+
+/* --- HEADER (ПОТОЛОК) --- */
+.header-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, #16110d, #0d0907);
+  border-bottom: 2px solid #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+.header-bar::after {
+  content: ''; position: absolute; inset: 0;
+  background: url('../images/grain.png');
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.lang-switch { position: relative; display: flex; gap: 8px; z-index: 2; }
+.lang-btn {
+  background: none; border: 1px solid var(--line); color: var(--muted);
+  font-family: var(--font-ui); font-size: .8rem; padding: 6px 13px;
+  border-radius: 20px; cursor: pointer; transition: color .2s, border-color .2s;
+}
+.lang-btn.is-active, .lang-btn:hover { color: var(--ink); border-color: var(--ink); }
+
+.identity { position: relative; z-index: 2; text-align: center; pointer-events: none; }
+.identity .name { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; margin: 0; }
+.identity .line { font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--muted); margin: 6px 0 0; }
+
+.social-bar { position: relative; display: flex; gap: 18px; z-index: 2; }
+.social-bar a {
+  display: flex; align-items: center; justify-content: center; width: 24px; height: 24px;
+  color: var(--ink); opacity: .78; transition: opacity .2s, transform .2s;
+}
+.social-bar a:hover { opacity: 1; transform: translateY(-1px); }
+.social-bar svg { width: 100%; height: 100%; display: block; }
+
+/* --- СТЕНА И ГАЛЕРЕЯ --- */
+.wall-track {
+  position: fixed;
+  top: 90px; bottom: 0; left: 0; right: 0;
+  overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: none;
+  cursor: grab;
+  z-index: 2;
+}
+.wall-track::-webkit-scrollbar{ display: none; }
+.wall-track.is-grabbing{ cursor: grabbing; }
+
+.wall-surface {
+  position: relative;
+  height: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: stretch;
+  padding: 0 5vw;
+  background-color: #1a1a1a;
+  background-image: 
+    url('../images/grain.png'),
+    linear-gradient(to bottom, #1f1f1f, #0d0d0d);
+  background-blend-mode: overlay, normal;
+  box-shadow: inset 0 25px 40px -15px rgba(0,0,0,0.8);
+}
+.wall-baseboard {
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 16px;
+  background: #080808;
+  border-top: 2px solid #222;
+  z-index: 0;
+}
+
+.wall-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  min-width: 300px;
+}
+.wall-col.stack { gap: 60px; }
+.wall-col.floor { justify-content: flex-end; padding-bottom: 16px; }
+
+/* --- ОСВЕЩЕНИЕ --- */
+.lamp {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 44px; height: 12px;
+  background: #111;
+  border-radius: 0 0 4px 4px;
+  border: 1px solid #333;
+  border-top: none;
+  z-index: 10;
+}
+.lamp::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 8px; right: 8px; height: 3px;
+  background: #ffe3b3; border-radius: 50%;
+  box-shadow: 0 1px 8px #ffe3b3;
+}
+.spot {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 55vw; max-width: 700px; height: 100%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at top, rgba(255, 235, 195, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  z-index: 1;
+}
+.wall-col.in-view .spot { opacity: 1; }
+
+/* --- КАРТИНЫ И РАМКИ --- */
+.wall-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(var(--dy, 0px));
+  margin: 0;
+}
+.wall-col.floor .wall-item { transform: none; }
+
+.frame {
+  position: relative;
+  z-index: 2;
+  border-radius: 2px;
+  padding: 12px;
+  background: linear-gradient(150deg, var(--wood-hi) 0%, var(--wood-lo) 55%, #0c0805 100%);
+  box-shadow: 
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    inset 0 2px 3px rgba(255,255,255,.12),
+    0 25px 50px rgba(0,0,0,.7);
+  cursor: zoom-in;
+}
+.mat {
+  display: block; overflow: hidden;
+  border: 2px solid var(--gold);
+  background: var(--mat);
+  padding: clamp(8px, 1.8vh, 18px);
+  box-shadow: inset 0 0 10px rgba(0,0,0,.15);
+}
+.wall-item img {
+  display: block;
+  height: var(--h); width: auto; max-width: 50vw;
+  -webkit-user-drag: none;
+}
+
+/* --- ПОДВЕСЫ (ГВОЗДИ И ВЕРЕВОЧКИ) --- */
+.hardware {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  z-index: 0;
+}
+/* Обычный гвоздь */
+.hardware.nail {
+  top: -20px;
+  width: 7px; height: 7px;
+  background: #111; border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(255,255,255,0.2), inset 0 2px 3px rgba(0,0,0,1);
+}
+/* Веревочка (шнур натягивается от краев рамы к гвоздю) */
+.hardware.string {
+  top: -55px;
+  width: 50%;
+  height: 55px;
+}
+.hardware.string::before { /* Гвоздь */
+  content: ''; position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 7px; height: 7px;
+  background: #111; border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(255,255,255,0.2), inset 0 2px 3px rgba(0,0,0,1);
+}
+.hardware.string::after { /* Сам шнур (нарисован градиентом как треугольник без низа) */
+  content: ''; position: absolute;
+  top: 4px; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(to top right, transparent 48%, rgba(255,255,255,0.25) 49%, rgba(255,255,255,0.25) 51%, transparent 52%) left / 50.5% 100% no-repeat,
+    linear-gradient(to top left, transparent 48%, rgba(255,255,255,0.25) 49%, rgba(255,255,255,0.25) 51%, transparent 52%) right / 50.5% 100% no-repeat;
+}
+
+/* --- ТАБЛИЧКИ --- */
+.plaque {
+  position: relative; z-index: 2;
+  margin: 16px 0 0;
+  font-size: .78rem; color: var(--muted);
+  text-align: center; max-width: 20vw; line-height: 1.4;
+}
+
+/* --- LIGHTBOX --- */
+.lightbox{
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(8,7,6,0);
+  display: flex; align-items: center; justify-content: center;
+  padding: 6vh 6vw; visibility: hidden;
+  transition: background .45s ease, visibility 0s linear .45s;
+}
+.lightbox.is-open{ background: rgba(8,7,6,0.92); visibility: visible; transition: background .45s ease; }
+.lightbox img{
+  max-width: 82vw; max-height: 82svh;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  opacity: 0; transform: scale(.95);
+  transition: opacity .4s cubic-bezier(.22,.8,.25,1), transform .4s cubic-bezier(.22,.8,.25,1);
+}
+.lightbox.is-open img{ opacity: 1; transform: scale(1); }
+.lightbox-caption{
+  position: absolute; left: 50%; bottom: 5vh; transform: translateX(-50%);
+  font-size: 1rem; color: var(--ink); text-align: center; opacity: 0;
+  transition: opacity .4s ease .1s;
+}
+.lightbox.is-open .lightbox-caption{ opacity: 1; }
+.lightbox-close{
+  position: absolute; top: 26px; right: 30px;
+  background: none; border: none; color: var(--ink);
+  font-size: 2.1rem; cursor: pointer; opacity: 0; transition: opacity .3s;
+}
+.lightbox.is-open .lightbox-close{ opacity: .85; }
+.lightbox-close:hover{ opacity: 1; }

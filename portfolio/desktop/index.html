@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polina Pavlova — illustration and graphic design</title>
+<meta name="description" content="Polina Pavlova — illustration, book covers, graphic design. Digital, watercolor, pencil.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,600&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ВЕРХНЯЯ ПАНЕЛЬ (ПОТОЛОК) -->
+<header class="header-bar">
+  <div class="lang-switch">
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="sr">SR</button>
+  </div>
+
+  <div class="identity">
+    <p class="name" data-i18n="heroName">Polina Pavlova</p>
+    <p class="line" data-i18n="heroLine">Illustrates books, draws people, and designs posters — from pencil to digital.</p>
+  </div>
+
+  <div class="social-bar">
+    <a href="mailto:polina.pavlova.contact@gmail.com" aria-label="Email" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3 7l9 6 9-6"/>
+      </svg>
+    </a>
+    <a href="https://instagram.com/polindrous" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="igGrad" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stop-color="#f58529"/>
+            <stop offset="35%" stop-color="#dd2a7b"/>
+            <stop offset="70%" stop-color="#8134af"/>
+            <stop offset="100%" stop-color="#515bd4"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igGrad)"/>
+        <rect x="6.5" y="6.5" width="11" height="11" rx="3.2" fill="none" stroke="#fff" stroke-width="1.6"/>
+        <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6"/>
+        <circle cx="17" cy="7" r="1.1" fill="#fff"/>
+      </svg>
+    </a>
+    <a href="https://t.me/polindrous" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 2L11 13" />
+        <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+      </svg>
+    </a>
+  </div>
+</header>
+
+<!-- ГАЛЕРЕЙНАЯ СТЕНА -->
+<div class="wall-track" id="wallTrack">
+  <div class="wall-surface">
+    <div class="wall-baseboard"></div>
+
+    <!-- DIGITAL -->
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-10px" data-chapter-key="digitalTitle" data-alt-key="gnezdo">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:40vh" src="../images/digital-01-gnezdo-cover.jpg" width="895" height="1400" alt="" data-i18n-alt="gnezdo" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:10px" data-chapter-key="digitalTitle" data-alt-key="kapustnikBw">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/digital-02-kapustnik-bw.jpg" width="905" height="1280" alt="" data-i18n-alt="kapustnikBw" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-15px" data-chapter-key="digitalTitle" data-alt-key="kapustnikGreen">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/digital-03-poster-green.jpg" width="904" height="1280" alt="" data-i18n-alt="kapustnikGreen" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <!-- WATERCOLOR STACK 1 -->
+    <div class="wall-col stack">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="watercolorTitle" data-alt-key="tomatoes">
+        <div class="hardware nail"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:22vh" src="../images/watercolor-01-tomatoes.jpg" width="891" height="1280" alt="" data-i18n-alt="tomatoes" loading="lazy">
+        </div></div>
+      </figure>
+      <figure class="wall-item" data-chapter-key="watercolorTitle" data-alt-key="fish">
+        <div class="hardware nail"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:22vh" src="../images/watercolor-02-fish.jpg" width="862" height="1240" alt="" data-i18n-alt="fish" loading="lazy">
+        </div></div>
+      </figure>
+    </div>
+
+    <!-- WATERCOLOR 3 (Still life) -->
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:5px" data-chapter-key="watercolorTitle" data-alt-key="watercolorStillLife">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:36vh" src="../images/watercolor-03-still-life.jpg" width="901" height="1280" alt="" data-i18n-alt="watercolorStillLife" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <!-- WATERCOLOR 4 (Exit Poster) -->
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:-15px" data-chapter-key="watercolorTitle" data-alt-key="exitPoster">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:42vh" src="../images/watercolor-04-exit-poster.jpg" width="639" height="905" alt="" data-i18n-alt="exitPoster" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <!-- WATERCOLOR STACK 2 -->
+    <div class="wall-col stack">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="watercolorTitle" data-alt-key="heartCover">
+        <div class="hardware nail"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:24vh" src="../images/watercolor-05-heart-cover.jpg" width="875" height="616" alt="" data-i18n-alt="heartCover" loading="lazy">
+        </div></div>
+      </figure>
+      <figure class="wall-item" data-chapter-key="watercolorTitle" data-alt-key="metamorphosisCover">
+        <div class="hardware nail"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:24vh" src="../images/watercolor-06-metamorphosis-cover.jpg" width="870" height="597" alt="" data-i18n-alt="metamorphosisCover" loading="lazy">
+        </div></div>
+      </figure>
+    </div>
+
+    <div class="wall-col">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" style="--dy:10px" data-chapter-key="watercolorTitle" data-alt-key="matildaCover">
+        <div class="hardware string"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:30vh" src="../images/watercolor-07-matilda-cover.jpg" width="917" height="640" alt="" data-i18n-alt="matildaCover" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <!-- PENCIL - FLOOR ITEMS -->
+    <div class="wall-col floor">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="pencilStillLife">
+        <div class="frame"><div class="mat">
+          <img style="--h:55vh" src="../images/pencil-01-still-life.jpg" width="837" height="1176" alt="" data-i18n-alt="pencilStillLife" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <div class="wall-col floor">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="torsoBack">
+        <div class="frame"><div class="mat">
+          <img style="--h:55vh" src="../images/pencil-02-torso-back.jpg" width="839" height="1124" alt="" data-i18n-alt="torsoBack" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+    
+    <div class="wall-col floor">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="torsoFront">
+        <div class="frame"><div class="mat">
+          <img style="--h:55vh" src="../images/pencil-03-torso-front.jpg" width="863" height="1209" alt="" data-i18n-alt="torsoFront" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <!-- PENCIL - STACKED HEADS -->
+    <div class="wall-col stack" style="margin-inline: 40px">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="houdon">
+        <div class="hardware nail"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:28vh" src="../images/pencil-06-houdon.jpg" width="763" height="1076" alt="" data-i18n-alt="houdon" loading="lazy">
+        </div></div>
+      </figure>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="apollo">
+        <div class="hardware nail"></div>
+        <div class="frame"><div class="mat">
+          <img style="--h:28vh" src="../images/pencil-07-apollo.jpg" width="732" height="1031" alt="" data-i18n-alt="apollo" loading="lazy">
+        </div></div>
+      </figure>
+    </div>
+
+    <!-- PENCIL - FIGURES -->
+    <div class="wall-col floor">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="figureStanding">
+        <div class="frame"><div class="mat">
+          <img style="--h:60vh" src="../images/pencil-04-figure-standing.jpg" width="854" height="1248" alt="" data-i18n-alt="figureStanding" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+    <div class="wall-col floor" style="padding-right: 10vw;">
+      <div class="lamp"></div><div class="spot"></div>
+      <figure class="wall-item" data-chapter-key="pencilTitle" data-alt-key="figureSeated">
+        <div class="frame"><div class="mat">
+          <img style="--h:60vh" src="../images/pencil-05-figure-seated.jpg" width="622" height="932" alt="" data-i18n-alt="figureSeated" loading="lazy">
+        </div></div>
+        <figcaption class="plaque"></figcaption>
+      </figure>
+    </div>
+
+  </div>
+</div>
+
+<!-- Лайтбокс -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+  <img id="lightboxImg" src="" alt="">
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+</div>
+
+<script src="../content.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

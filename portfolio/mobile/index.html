@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Полина Павлова - иллюстрация и графический дизайн</title>
+<meta name="description" content="Полина Павлова - иллюстрация, книжные обложки, графический дизайн. Диджитал, акварель, карандаш.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,600&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<div class="lang-switch">
+  <button class="lang-btn" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="ru">RU</button>
+  <button class="lang-btn" data-lang="sr">SR</button>
+</div>
+
+<div class="social-bar">
+  <a href="mailto:polina.pavlova.contact@gmail.com" aria-label="Email" title="polina.pavlova.contact@gmail.com">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+      <rect x="3" y="5" width="18" height="14" rx="2"/>
+      <path d="M3 7l9 6 9-6"/>
+    </svg>
+  </a>
+  <a href="https://instagram.com/polindrous" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="@polindrous">
+    <svg viewBox="0 0 24 24">
+      <defs>
+        <linearGradient id="igGrad" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="#f58529"/>
+          <stop offset="35%" stop-color="#dd2a7b"/>
+          <stop offset="70%" stop-color="#8134af"/>
+          <stop offset="100%" stop-color="#515bd4"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igGrad)"/>
+      <rect x="6.5" y="6.5" width="11" height="11" rx="3.2" fill="none" stroke="#fff" stroke-width="1.6"/>
+      <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6"/>
+      <circle cx="17" cy="7" r="1.1" fill="#fff"/>
+    </svg>
+  </a>
+</div>
+
+<div class="stage" id="stage">
+
+  <!-- STATE 1: hero -->
+  <section class="hero-view" id="heroView">
+    <h1 class="hero-name" data-i18n="heroName">Polina Pavlova</h1>
+    <p class="hero-line" data-i18n="heroLine">Illustrates books, draws people, and designs posters - from pencil to digital.</p>
+    <button class="scroll-cue" id="scrollCue" aria-label="Листать"><span class="chevron"></span></button>
+  </section>
+
+  <!-- STATE 2: carousel -->
+  <section class="carousel-view" id="carouselView">
+    <header class="compact-bar">
+      <p class="name" data-i18n="heroName">Polina Pavlova</p>
+      <p class="line" data-i18n="heroLine">Illustrates books, draws people, and designs posters - from pencil to digital.</p>
+    </header>
+
+    <div class="carousel-stage" id="carouselStage">
+      <div class="carousel-track" id="track">
+
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="digitalTitle" data-alt-key="gnezdo">
+          <img src="../images/digital-01-gnezdo-cover.jpg" width="895" height="1400" alt="Обложка комикса «Гнездо»" data-i18n-alt="gnezdo" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="digitalTitle" data-alt-key="kapustnikBw">
+          <img src="../images/digital-02-kapustnik-bw.jpg" width="905" height="1280" alt="Афиша поэтического капустника, чёрно-белая версия" data-i18n-alt="kapustnikBw" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="digitalTitle" data-alt-key="kapustnikGreen">
+          <img src="../images/digital-03-poster-green.jpg" width="904" height="1280" alt="Афиша поэтического капустника, зелёная версия" data-i18n-alt="kapustnikGreen" loading="lazy">
+        </div>
+
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="watercolorTitle" data-alt-key="tomatoes">
+          <img src="../images/watercolor-01-tomatoes.jpg" width="891" height="1280" alt="Акварельный этюд, помидоры" data-i18n-alt="tomatoes" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="watercolorTitle" data-alt-key="fish">
+          <img src="../images/watercolor-02-fish.jpg" width="862" height="1240" alt="Акварельный этюд, рыбы" data-i18n-alt="fish" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="watercolorTitle" data-alt-key="watercolorStillLife">
+          <img src="../images/watercolor-03-still-life.jpg" width="901" height="1280" alt="Акварельный натюрморт" data-i18n-alt="watercolorStillLife" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="watercolorTitle" data-alt-key="exitPoster">
+          <img src="../images/watercolor-04-exit-poster.jpg" width="639" height="905" alt="Афиша фестиваля Exit" data-i18n-alt="exitPoster" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="landscape" data-chapter-key="watercolorTitle" data-alt-key="heartCover">
+          <img src="../images/watercolor-05-heart-cover.jpg" width="875" height="616" alt="Обложка книги «Собачье сердце»" data-i18n-alt="heartCover" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="landscape" data-chapter-key="watercolorTitle" data-alt-key="metamorphosisCover">
+          <img src="../images/watercolor-06-metamorphosis-cover.jpg" width="870" height="597" alt="Обложка книги «Превращение»" data-i18n-alt="metamorphosisCover" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="landscape" data-chapter-key="watercolorTitle" data-alt-key="matildaCover">
+          <img src="../images/watercolor-07-matilda-cover.jpg" width="917" height="640" alt="Обложка книги «Матильда»" data-i18n-alt="matildaCover" loading="lazy">
+        </div>
+
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="pencilTitle" data-alt-key="pencilStillLife">
+          <img src="../images/pencil-01-still-life.jpg" width="837" height="1176" alt="Карандашный натюрморт" data-i18n-alt="pencilStillLife" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="pencilTitle" data-alt-key="torsoBack">
+          <img src="../images/pencil-02-torso-back.jpg" width="839" height="1124" alt="Разрисовка мышц, вид сзади" data-i18n-alt="torsoBack" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="pencilTitle" data-alt-key="torsoFront">
+          <img src="../images/pencil-03-torso-front.jpg" width="863" height="1209" alt="Разрисовка мышц, вид спереди" data-i18n-alt="torsoFront" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="pencilTitle" data-alt-key="figureStanding">
+          <img src="../images/pencil-04-figure-standing.jpg" width="854" height="1248" alt="Мужская фигура, стоя" data-i18n-alt="figureStanding" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="pencilTitle" data-alt-key="figureSeated">
+          <img src="../images/pencil-05-figure-seated.jpg" width="622" height="932" alt="Мужчина сидит на стуле" data-i18n-alt="figureSeated" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="pencilTitle" data-alt-key="houdon">
+          <img src="../images/pencil-06-houdon.jpg" width="763" height="1076" alt="Гипсовая голова, слепок Гудона" data-i18n-alt="houdon" loading="lazy">
+        </div>
+        <div class="carousel-item" data-orientation="portrait" data-chapter-key="pencilTitle" data-alt-key="apollo">
+          <img src="../images/pencil-07-apollo.jpg" width="732" height="1031" alt="Гипсовая голова Аполлона" data-i18n-alt="apollo" loading="lazy">
+        </div>
+
+      </div>
+      <p class="caption" id="caption" aria-hidden="true"></p>
+    </div>
+  </section>
+
+</div>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">×</button>
+  <img id="lightboxImg" src="" alt="">
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+</div>
+
+<script src="../content.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
