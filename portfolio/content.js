@@ -5,7 +5,7 @@
 const CONTENT = {
   ru: {
     heroName: "Полина Павлова",
-    heroLine: "Иллюстрация, постеры, рисунок — от акварели до компьютерной графики.",
+    heroLine: "Иллюстрация, постеры, рисунок - от акварели до компьютерной графики.",
     digitalTitle: "Диджитал",
     digitalDesc: "Афиши и обложки, собранные под конкретное событие.",
     watercolorTitle: "Акварель",
@@ -16,8 +16,8 @@ const CONTENT = {
     outroLine: "Открыта к заказам на иллюстрацию, обложки и афиши.",
     alts: {
       gnezdo: { title: "Гнездо", specs: "Диджитал" },
-      kapustnikBw: { title: "Капустник", specs: "Диджитал — ч/б версия" },
-      kapustnikGreen: { title: "Капустник", specs: "Диджитал — цветная версия" },
+      kapustnikBw: { title: "Капустник", specs: "Диджитал - ч/б версия" },
+      kapustnikGreen: { title: "Капустник", specs: "Диджитал - цветная версия" },
       tomatoes: { title: "Этюд \"Помидорный\"", specs: "акварель · 14,8 × 21 см" },
       fish: { title: "Этюд \"Рыбный\"", specs: "акварель · 14,8 × 21 см" },
       watercolorStillLife: { title: "Этюд с Ягермейстером", specs: "акварель · 29,7 × 42 см" },
@@ -37,7 +37,7 @@ const CONTENT = {
 
   en: {
     heroName: "Polina Pavlova",
-    heroLine: "Illustration, posters, drawing — from watercolor to computer graphics.",
+    heroLine: "Illustration, posters, drawing - from watercolor to computer graphics.",
     digitalTitle: "Digital",
     digitalDesc: "Posters and covers, each built around a specific event.",
     watercolorTitle: "Watercolor",
@@ -45,11 +45,11 @@ const CONTENT = {
     pencilTitle: "Pencil",
     pencilDesc: "Academic drawing: figure, portrait, still life, close attention to form.",
     outroName: "Polina Pavlova",
-    outroLine: "Open to commissions — illustration, covers, posters.",
+    outroLine: "Open to commissions - illustration, covers, posters.",
     alts: {
       gnezdo: { title: "The Nest", specs: "Digital" },
-      kapustnikBw: { title: "Kapustnik", specs: "Digital — black-and-white version" },
-      kapustnikGreen: { title: "Kapustnik", specs: "Digital — color version" },
+      kapustnikBw: { title: "Kapustnik", specs: "Digital - black-and-white version" },
+      kapustnikGreen: { title: "Kapustnik", specs: "Digital - color version" },
       tomatoes: { title: "Study \"Tomato\"", specs: "watercolor · 14.8 × 21 cm" },
       fish: { title: "Study \"Fish\"", specs: "watercolor · 14.8 × 21 cm" },
       watercolorStillLife: { title: "Study with Jägermeister", specs: "watercolor · 29.7 × 42 cm" },
@@ -69,7 +69,7 @@ const CONTENT = {
 
   sr: {
     heroName: "Polina Pavlova",
-    heroLine: "Ilustracija, plakati, crtež — od akvarela do kompjuterske grafike.",
+    heroLine: "Ilustracija, plakati, crtež - od akvarela do kompjuterske grafike.",
     digitalTitle: "Digitalno",
     digitalDesc: "Plakati i korice, napravljeni za konkretan događaj.",
     watercolorTitle: "Akvarel",
@@ -77,11 +77,11 @@ const CONTENT = {
     pencilTitle: "Olovka",
     pencilDesc: "Akademski crtež: figura, portret, mrtva priroda, pažnja posvećena formi.",
     outroName: "Polina Pavlova",
-    outroLine: "Otvorena za saradnju — ilustracija, korice, plakati.",
+    outroLine: "Otvorena za saradnju - ilustracija, korice, plakati.",
     alts: {
       gnezdo: { title: "Gnezdo", specs: "Digitalno" },
-      kapustnikBw: { title: "Kapustnik", specs: "Digitalno — crno-bela verzija" },
-      kapustnikGreen: { title: "Kapustnik", specs: "Digitalno — kolor verzija" },
+      kapustnikBw: { title: "Kapustnik", specs: "Digitalno - crno-bela verzija" },
+      kapustnikGreen: { title: "Kapustnik", specs: "Digitalno - kolor verzija" },
       tomatoes: { title: "Studija \"Paradajz\"", specs: "akvarel · 14,8 × 21 cm" },
       fish: { title: "Studija \"Riba\"", specs: "akvarel · 14,8 × 21 cm" },
       watercolorStillLife: { title: "Studija sa Jägermeister-om", specs: "akvarel · 29,7 × 42 cm" },
