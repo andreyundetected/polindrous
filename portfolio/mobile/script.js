@@ -231,14 +231,16 @@
 
   function buildCaption(item) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
-    const chapter = dict[item.dataset.chapterKey] || '';
-    const alt = (dict.alts && dict.alts[item.dataset.altKey] && dict.alts[item.dataset.altKey].title) || '';
-    return chapter && alt ? `${chapter} - ${alt}` : (chapter || alt);
+    const entry = dict.alts && dict.alts[item.dataset.altKey];
+    if (!entry) return '';
+    const title = entry.title || '';
+    const specs = entry.specs || '';
+    return specs ? `${title}<br><span style="opacity:0.72; font-size:0.86em; display:block; margin-top:3px;">${specs}</span>` : title;
   }
 
   let captionHideTimer = null;
   function showCaptionThenFade() {
-    caption.textContent = buildCaption(items[activeIndex]);
+    caption.innerHTML = buildCaption(items[activeIndex]);
     caption.classList.add('is-visible');
     clearTimeout(captionHideTimer);
     captionHideTimer = setTimeout(() => caption.classList.remove('is-visible'), 5000);
@@ -249,7 +251,7 @@
       showCaptionThenFade();
     }
     if (lightbox && lightbox.classList.contains('is-open')) {
-      lightboxCaption.textContent = buildCaption(items[activeIndex]);
+      lightboxCaption.innerHTML = buildCaption(items[activeIndex]);
     }
   };
 
@@ -349,7 +351,7 @@
     const img = item.querySelector('img');
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt;
-    lightboxCaption.textContent = buildCaption(item);
+    lightboxCaption.innerHTML = buildCaption(item);
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
   }
