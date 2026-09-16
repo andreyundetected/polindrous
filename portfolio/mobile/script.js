@@ -51,7 +51,7 @@
     });
     document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
       const key = el.dataset.i18nAlt;
-      if (dict.alts && dict.alts[key] != null) el.setAttribute('alt', dict.alts[key]);
+      if (dict.alts && dict.alts[key]) el.setAttribute('alt', dict.alts[key].title || '');
     });
     document.querySelectorAll('.lang-btn').forEach((b) => {
       b.classList.toggle('is-active', b.dataset.lang === lang);
@@ -232,7 +232,7 @@
   function buildCaption(item) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
     const chapter = dict[item.dataset.chapterKey] || '';
-    const alt = (dict.alts && dict.alts[item.dataset.altKey]) || '';
+    const alt = (dict.alts && dict.alts[item.dataset.altKey] && dict.alts[item.dataset.altKey].title) || '';
     return chapter && alt ? `${chapter} - ${alt}` : (chapter || alt);
   }
 

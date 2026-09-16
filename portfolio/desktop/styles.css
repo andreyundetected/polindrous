@@ -242,8 +242,20 @@ img{ max-width: none; display: block; }
 .plaque {
   position: relative; z-index: 2;
   margin: 16px 0 0;
-  font-size: .78rem; color: var(--muted);
-  text-align: center; max-width: 20vw; line-height: 1.4;
+  text-align: center; max-width: 20vw;
+}
+.plaque-title{
+  display: block;
+  font-size: .8rem;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.plaque-specs{
+  display: block;
+  font-size: .68rem;
+  letter-spacing: .02em;
+  color: var(--muted);
+  margin-top: 4px;
 }
 
 /* --- LIGHTBOX --- */

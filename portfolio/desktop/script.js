@@ -15,7 +15,7 @@
     });
     document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
       const key = el.dataset.i18nAlt;
-      if (dict.alts && dict.alts[key] != null) el.setAttribute('alt', dict.alts[key]);
+      if (dict.alts && dict.alts[key]) el.setAttribute('alt', dict.alts[key].title || '');
     });
     document.querySelectorAll('.lang-btn').forEach((b) => {
       b.classList.toggle('is-active', b.dataset.lang === lang);
@@ -36,13 +36,21 @@
   function buildCaption(item) {
     const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
     const chapter = dict[item.dataset.chapterKey] || '';
-    const alt = (dict.alts && dict.alts[item.dataset.altKey]) || '';
-    return chapter && alt ? `${chapter} — ${alt}` : (chapter || alt);
+    const alt = (dict.alts && dict.alts[item.dataset.altKey] && dict.alts[item.dataset.altKey].title) || '';
+    return chapter && alt ? `${chapter} - ${alt}` : (chapter || alt);
   }
   function refreshPlaques() {
+    const dict = (typeof CONTENT !== 'undefined' && CONTENT[currentLang]) || {};
     items.forEach((item) => {
-      const p = item.querySelector('.plaque');
-      if (p) p.textContent = buildCaption(item);
+      const titleEl = item.querySelector('.plaque-title');
+      const specsEl = item.querySelector('.plaque-specs');
+      const entry = dict.alts && dict.alts[item.dataset.altKey];
+      if (titleEl) titleEl.textContent = (entry && entry.title) || '';
+      if (specsEl) {
+        const specs = (entry && entry.specs) || '';
+        specsEl.textContent = specs;
+        specsEl.style.display = specs ? '' : 'none';
+      }
     });
   }
 
