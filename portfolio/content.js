@@ -16,6 +16,7 @@ const CONTENT = {
     outroLine: "Открыта к заказам на иллюстрацию, обложки и афиши.",
     alts: {
       gnezdo: { title: "Гнездо", specs: "Диджитал" },
+      kurbatov: { title: "Курбатов", specs: "Диджитал" },
       kapustnikBw: { title: "Капустник", specs: "Диджитал - ч/б версия" },
       kapustnikGreen: { title: "Капустник", specs: "Диджитал - цветная версия" },
       tomatoes: { title: "Этюд \"Помидорный\"", specs: "акварель · 14,8 × 21 см" },
@@ -48,6 +49,7 @@ const CONTENT = {
     outroLine: "Open to commissions - illustration, covers, posters.",
     alts: {
       gnezdo: { title: "The Nest", specs: "Digital" },
+      kurbatov: { title: "Kurbatov", specs: "Digital" },
       kapustnikBw: { title: "Kapustnik", specs: "Digital - black-and-white version" },
       kapustnikGreen: { title: "Kapustnik", specs: "Digital - color version" },
       tomatoes: { title: "Study \"Tomato\"", specs: "watercolor · 14.8 × 21 cm" },
@@ -80,6 +82,7 @@ const CONTENT = {
     outroLine: "Otvorena za saradnju - ilustracija, korice, plakati.",
     alts: {
       gnezdo: { title: "Gnezdo", specs: "Digitalno" },
+      kurbatov: { title: "Kurbatov", specs: "Digitalno" },
       kapustnikBw: { title: "Kapustnik", specs: "Digitalno - crno-bela verzija" },
       kapustnikGreen: { title: "Kapustnik", specs: "Digitalno - kolor verzija" },
       tomatoes: { title: "Studija \"Paradajz\"", specs: "akvarel · 14,8 × 21 cm" },
